@@ -1,0 +1,125 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image:url("../images/bg4.png") ;
+	width: 80%;
+	margin: auto;
+	min-height: 100vh;
+}
+.container{
+    width: 50%;
+    height: 75%;
+    background-image: linear-gradient(to right,rgb(255,69,0),rgb(255, 153, 35));
+
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+}
+.form-control{
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid  rgb(255,69,0);
+    font-size: 20px;
+}
+.form-select{
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid  rgb(255,69,0);
+    font-size: 20px;
+}
+.form-label{
+    font-size: 20px;
+    color: white;
+}
+.btn-primary{
+    border-radius: 0;
+    background-color: rgb(255,69,0);
+    border: none;
+}
+.form-check-label{
+    font-size: 20px;
+    color: white;
+}
+.form-control-file{
+    font-size: 20px;
+    color: white;
+}
+.form-control-file{
+    font-size: 20px;
+    color: white;
+}
+.col-10{
+    color: white;
+    padding: 20px;
+    margin-left: 30px;
+   
+}
+.btn-2{
+    background-image: linear-gradient(to left,rgb(255,69,0),rgb(139,69,19));
+    font-size: 20px;
+    color: white;
+    letter-spacing: 0.1em;
+    transition: 0.5s;
+    text-transform: uppercase;
+}
+.btn-2:hover{
+
+    background-image: linear-gradient(to right,rgb(255,69,0),rgb(139,69,19));
+    letter-spacing: 0.25em;
+    box-shadow: 0 0 35px;
+
+    }
+.ajoutphoto{
+    font-size: 20px;
+    color: white;
+}
+.taille{
+    font-size: 20px;
+    color: white;
+}
+header {
+	width:auto;
+	background-size: cover;
+}
+nav{
+	display:flex;
+
+}
+.nav-link{
+    color: rgb(139,69,19) !important;
+	font-size: 22px;
+	font-weight: bolder;
+	margin: 0 50px;
+}
+.search{
+    color: rgb(139,69,19) !important;
+	font-size: 22px;
+	font-weight: bolder;
+}
+h1,h2{
+    color: white;
+    font-size: 25px;
+
+}
+.btn-1:hover{
+transform: translateY(-5px);
+}
+
+/**media Querry***/
+@media only screen and (max-width:600px){
+    .container{
+        width: 90%;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        padding-bottom: 40px;
+    }
+}

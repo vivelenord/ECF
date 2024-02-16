@@ -1,0 +1,128 @@
+body{
+    max-width: 1400px;
+    min-height: 110vh;
+    margin-inline: auto;
+    background-color: #eee9e4 !important;
+}
+
+a, a:link, a:visited, a:hover {
+    text-decoration: none;
+    color: black !important; 
+}
+
+#navbar{
+    display: flex;
+    background-color: #d0621c;
+    border: 2px solid #57300f !important;
+    border-radius: 0 0 10px 10px !important;
+    border-top: 0 !important;
+
+}
+
+#fixe{
+    width:250px;
+    text-align: center;
+}
+
+#fixe a{
+    display: flex;
+    color:white !important;
+    font-size: 1.5em !important;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1em ;
+}
+
+#fixe p{
+    margin: 0;
+    text-align: center;
+}
+
+#fixe img{
+    height: 100px;
+    border-radius: 6%;
+    border-top-left-radius: 0;
+    overflow: hidden;
+}
+
+.conteneur{
+    display: flex;
+    flex : 1 1 auto;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+main{
+    width: 80%;
+    height:auto;
+    margin: auto;
+    padding-top: 3em;
+}
+
+#boutons{
+    flex-grow:4;
+}
+
+form *:focus{
+    box-shadow: none !important;
+    border-color: #57300f !important;
+}
+
+.bouton_nav{
+    width: 20%;
+    height:40%;
+}
+ 
+.elem {
+    border: 2px solid #57300f;
+    border-radius: 10px !important;
+    min-height: 40px;
+    background-color: white !important;
+}
+
+.elem:hover {
+    color:white !important;
+    background-color: #c2ad9c !important;
+    border-radius: 10px;
+}
+
+.elem:hover a{
+    color:white !important;
+}
+
+span{
+    background-color: #fffdfb;
+    border-radius: 10px;
+    font-size: 2.1rem;
+}
+
+/*---------------------------------*/
+
+#recap{
+    height: auto;
+    border:2px solid white !important;
+    border-radius: 10px;
+}
+
+#images{
+    max-height: max-content;
+
+}
+
+.image_recap{
+    height: 130px !important;
+    width: 180px !important;
+    max-width: 48%;
+    background-color: white;
+    flex-grow: 1;
+    flex-shrink: 1 !important;
+}
+
+.reglage_images{
+    flex: 1 1 auto;
+}
+
+.btn-outline-light{
+    color: white;
+    background-color: white;
+}
