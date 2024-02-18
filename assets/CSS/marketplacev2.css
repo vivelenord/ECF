@@ -4,39 +4,74 @@
 	padding: 0;
 }
 
-body {
-	background-image:url("../images/bg4.png") ;
+/* body {
+	background-image:url("/assets/images/bg4.png") ;
 	width: 80%;
 	margin: auto;
 	min-height: 100vh;
+} */
+body{
+    max-width: 1400px;
+    margin-inline: auto;
+    background-color: #eee9e4 !important;
+    font-size: 1.25rem;
 }
+main{
+    width: 80%;
+    height:75vh;
+    margin: auto;
+    margin-top: 2em;
+    padding-top: 3em;
+}
+
 .container{
-    width: 50%;
-    height: 75%;
+    width: 60%;
+    height:50vh;
+    margin: auto;
+    /* margin-top: 2em; */
+    padding-top: 2em;
     background-image: linear-gradient(to right,rgb(255,69,0),rgb(255, 153, 35));
 
-    padding: 20px;
+    /* padding: 20px;
     margin-top: 10px;
     border-radius: 5px;
     position: absolute;
     left: 50%;
     top: 40%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%); */
+}
+.containerform{
+    width: 80%;
+    height:100vh;
+    margin: auto;
+    /* margin-top: 2em; */
+    /* padding-top: 2em; */
+    background-image: linear-gradient(to right,rgb(168, 105, 32),rgb(255, 153, 35));
+}
+form{
+    padding: 30px;
+}
+label
+{
+	display: block; /* La balise devient de type block. */
+    /* margin-left: 20px; */
+    /* margin-top: 2em; */
+    /* padding-top: 1em; */
 }
 .form-control{
     border-radius: 0;
     border: none;
     border-bottom: 1px solid  rgb(255,69,0);
-    font-size: 20px;
+    font-size: 22px;
 }
 .form-select{
     border-radius: 0;
     border: none;
     border-bottom: 1px solid  rgb(255,69,0);
-    font-size: 20px;
+    font-size: 22px;
 }
 .form-label{
-    font-size: 20px;
+    font-size: 22px;
     color: white;
 }
 .btn-primary{
@@ -45,11 +80,14 @@ body {
     border: none;
 }
 .form-check-label{
-    font-size: 20px;
+    font-size: 22px;
     color: white;
 }
+/* .form-check-input{
+    margin-left: 20px;
+} */
 .form-control-file{
-    font-size: 20px;
+    font-size: 22px;
     color: white;
 }
 .form-control-file{
@@ -58,17 +96,23 @@ body {
 }
 .col-10{
     color: white;
-    padding: 20px;
-    margin-left: 30px;
+    /* padding: 20px; */
+    /* margin-left: 30px; */
+    display: block;
+    margin : auto;
    
 }
 .btn-2{
     background-image: linear-gradient(to left,rgb(255,69,0),rgb(139,69,19));
-    font-size: 20px;
+    font-size: 25px;
     color: white;
     letter-spacing: 0.1em;
     transition: 0.5s;
     text-transform: uppercase;
+    display: block;
+    margin : auto;
+    margin-top: 20px;
+    text-align: center;
 }
 .btn-2:hover{
 
@@ -78,18 +122,25 @@ body {
 
     }
 .ajoutphoto{
-    font-size: 20px;
+    font-size: 22px;
     color: white;
 }
 .taille{
-    font-size: 20px;
+    font-size: 22px;
     color: white;
 }
-header {
+select{
+    height: 50px;
+}
+/* .menu-img{
+    display: flex;
+    float: left;
+} */
+/* header {
 	width:auto;
 	background-size: cover;
-}
-nav{
+} */
+/* nav{
 	display:flex;
 
 }
@@ -102,13 +153,58 @@ nav{
 .search{
     color: rgb(139,69,19) !important;
 	font-size: 22px;
-	font-weight: bolder;
-}
+	font-weight: bolder; */ */
+/* } */
 h1,h2{
-    color: white;
+    color: rgb(255,69,0);
     font-size: 25px;
+    text-align: center;
 
 }
+
+
+.galerie {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+    align-content: flex-start;
+}
+
+.galerie img {
+flex-grow: 1;
+flex-shrink: 1;     /* La propriété flex-shrink définit le facteur de rétrécissement d'un élément flexible. Si la taille de l'ensemble des éléments flexibles est supérieure à la taille du conteneur, les éléments seront comprimés selon leur facteur flex-shrink.*/
+flex-basis: auto;   /* La propriété flex-basis détermine la base de flexibilité utilisée comme taille initiale principale pour un élément flexible. */
+max-width: 150px;
+max-height: 150px;
+min-width: 130px;
+height: 150px;
+border:whitesmoke;
+border-style:solid;
+border-radius: 2px;
+border-width: 2px;
+object-fit: cover;
+}
+.galerie:hover img {
+    /* blur() pour obtenir un flou gaussien */
+    /* brightness() pour rendre une image plus sombre ou plus claire */
+    /* grayscale() convertit une image en niveau de gris */
+    /* scale() permet de modifier la taille d'un élément */
+    filter: brightness(0.8) grayscale(1) opacity(0.8) sepia(100%);
+    transform: scale(0.8) ;
+}
+.galerie img:hover {
+filter: brightness(1.5) opacity(1.2);
+transform: scale(1.2);
+}
+
+.error{
+    border-radius: 15px;
+    border-color: red;
+    border-style: double;
+    /* border: 2px red; */
+}
+
 .btn-1:hover{
 transform: translateY(-5px);
 }
@@ -123,3 +219,4 @@ transform: translateY(-5px);
         padding-bottom: 40px;
     }
 }
+
