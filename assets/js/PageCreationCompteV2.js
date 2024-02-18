@@ -111,6 +111,7 @@ function getsaisieUser(e){
     let ville1 = document.querySelector("#zoneSelect2").value + 'code postal';
     let departement1 = document.querySelector("#zoneSelect1").value;
     let photo1 = document.getElementById('photoprofil').files[0].name
+    //Les images sont dans assets/images/images-users
     let leType = 'art';
     document.querySelector("#form-user").style.display = "none";
     let user = new data.Utilisateur(leType, "p1", nom,prenom1,tel1,mail1,mail2,passw1,passw2,adresse1,adresse2,codepostal1,ville1,departement1,photo1,new Date());
