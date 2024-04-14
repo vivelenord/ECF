@@ -3,9 +3,9 @@
   <head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/assets/CSS/bootstrap.css">
-		<link rel="stylesheet" href="/assets/CSS/marketplacev2.css">
-        <link rel="stylesheet" href="/assets/CSS/navbar.css">
+		<link rel="stylesheet" href="../../assets/CSS/bootstrap.css">
+		<link rel="stylesheet" href="../../assets/CSS/marketplacev2.css">
+        <link rel="stylesheet" href="../../assets/CSS/navbar.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Création de compte</title>
      <!-- Fonctionalité gestion des utilisateurs par François -->
@@ -16,7 +16,7 @@
         <!-- Début de la navbar -->
         <nav class="rounded-bottom" id="navbar">
             <div class="" id="fixe">
-              <a href=""><img src="assets/images/logoshopart.jpg" alt="Logo">Shopart</a>
+              <a href=""><img src="../../assets/images/logoshopart.jpg" alt="Logo">Shopart</a>
              </div>
              <div class="conteneur" id="boutons">
                <button class="elem bouton_nav btn-warning"><a class="" href="#">Categorie</a></button>
@@ -25,8 +25,8 @@
                      <input class="form-control me-2" type="text" id="recherche" placeholder="Rechercher un produit ou un artisan" aria-label="Rechercher">
                       <button class="btn rounded-3 bg-white elem" id="recherchernav" type="submit">Rechercher</button>
                    </form> -->
-                   <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.html">Login Artisan</a></button>
-                   <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.html">Login Client</a></button>
+                   <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.php">Login Artisan</a></button>
+                   <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.php">Login Client</a></button>
                    <button class="elem bouton_nav btn-warning"><a class="" href="panier.html">Panier</a></button>
                  </div>
              </div>
@@ -130,7 +130,7 @@
           </ul> -->
     </footer>
         <!-- Fin du Footer -->
-    <script defer type="module" src="/assets/js/PageCreationCompteV2.js"></script>
-    <script src="/assets/CSS/bootstrap.bundle.min.js"></script>
+    <script defer type="module" src="../../assets/js/PageCreationCompteV2.js"></script>
+    <script src="../../assets/CSS/bootstrap.bundle.min.js"></script>
   </body>
 </html>

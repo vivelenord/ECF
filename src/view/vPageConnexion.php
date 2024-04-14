@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/CSS/PageConnexion.css">
-    <link rel="stylesheet" href="/assets/CSS/navbar.css">
+    <link rel="stylesheet" href="../../assets/CSS/PageConnexion.css">
+    <link rel="stylesheet" href="../../assets/CSS/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <title>Page de connexion</title>
     
     <!-- Fonctionalité gestion des utilisateurs par François -->
@@ -20,7 +21,7 @@
         <!-- ----------------------------navbar------------------------------------- -->
      <nav class="rounded-bottom" id="navbar">
       <div class="" id="fixe">
-        <a href=""><img src="assets/images/logoshopart.jpg" alt="Logo">Shopart</a>
+        <a href=""><img src="../../assets/images/logoshopart.jpg" alt="Logo">Shopart</a>
        </div>
        <div class="conteneur" id="boutons">
          <button class="elem bouton_nav btn-warning"><a class="" href="#">Categorie</a></button>
@@ -56,7 +57,7 @@
                 <i class="fa-solid fa-eye"></i>
             </div>
             <button type="submit" class="btn btn-2 col-10">Se connecter</button>
-            <a class="btn btn-2 col-10" href="CreationCompteV2.html" role="button">Créer un compte</a>
+            <a class="btn btn-2 col-10" href="CreationCompteV2.php" role="button">Créer un compte</a>
         </form>
         <div id="qunit"></div>
         <div id="qunit-fixture"></div>
