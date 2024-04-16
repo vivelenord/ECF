@@ -10,7 +10,7 @@ use PHP\webapp\DmException;
 use PHP\webapp\MyExceptionCase;
 
 //TODO : gestion des exceptions
-class DaoResto {
+class DaoMarketPlace {
 
     private \PDO $conn;
 
@@ -23,12 +23,12 @@ class DaoResto {
     }
 
     /**
-     * Retourne la liste des plats de la BDD
+     * Retourne la liste des users de la BDD
      *
-     * @return array : Tableau d'objets de type Plat
+     * @return array : Tableau d'objets de type user
      */
     public function getUsers() : ? array {
-        $plats = array();
+        $users = array();
         $query      = RequetesUser::SELECT_User;
         try {
             $cursor  = $this->conn->query($query);
@@ -47,16 +47,16 @@ class DaoResto {
         return $users;
     }
 
-    // public function getPlatsWithCategorie() : ? array {
+    // public function getusersWithCategorie() : ? array {
     //     $users = array();
-    //     $query      = RequetesUser::SELECT_PLAT_WITH_CATEGORIE;
+    //     $query      = RequetesUser::SELECT_user_WITH_CATEGORIE;
     //     try {
     //         $cursor  = $this->conn->query($query);
     //         // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
     //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
     //             $type = new TypeUser($row->idC, $row->libelleC);
     //             $user = new User($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($plats,$plat);
+    //             array_push($users,$user);
     //         }
     //     }
     //     catch (\Exception $e) {
@@ -65,24 +65,24 @@ class DaoResto {
     //     catch (\Error $error) {
     //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
     //     }
-    //     return $plats;
+    //     return $users;
     // }
 
     // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getPlatsByCategorie(Categorie $categorie) : ? array{
+    // public function getusersByCategorie(Categorie $categorie) : ? array{
     //     if (!isset($categorie)) throw new DaoException('Cette categorie est inexistante',8002);
-    //     $query      = Requetes::SELECT_PLAT_BY_CATEGORIE;
+    //     $query      = Requetes::SELECT_user_BY_CATEGORIE;
     //     try {
     //         $cursor  = $this->conn->prepare($query);
     //         $cursor->bindValue(1, $categorie->getId());
     //         $cursor->execute();
     //         // autre syntaxe
     //         // $cursor->execute([$categorie->getId()]);
-    //         $plats=[];
+    //         $users=[];
     //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-    //             $plat = new Plat($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($plats,$plat);
+    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
+    //             array_push($users,$user);
     //         }
     //     }
     //     catch (\Exception $e) {
@@ -91,13 +91,13 @@ class DaoResto {
     //     catch (\Error $error) {
     //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
     //     }
-    //     return $plats;
+    //     return $users;
     // }
 
         /**
-     * Retourne la liste des plats de la BDD
+     * Retourne la liste des users de la BDD
      *
-     * @return array : Tableau d'objets de type Plat
+     * @return array : Tableau d'objets de type user
      */
     public function getTypeUser() : ? array {
         $typeUsers = array();
@@ -105,7 +105,7 @@ class DaoResto {
         try {
             $cursor  = $this->conn->query($query);
             while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-                $typeUser = new TypeUser($row->idC, $row->libelleC);
+                $typeUser = new TypeUser($row->type, $row->lib_type);
                 array_push($typeUsers,$typeUser);
             }
         }
@@ -143,11 +143,11 @@ class DaoResto {
 
         // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getPlatById(int $id) : ?Plat {
-    //     if (!isset($id)) throw new DaoException('Ce plat est inexistant',8003);
-    //     $plat       = null;
+    // public function getuserById(int $id) : ?user {
+    //     if (!isset($id)) throw new DaoException('Ce user est inexistant',8003);
+    //     $user       = null;
     //     $categorie  = null;
-    //     $query      =Requetes::SELECT_PLAT_BY_ID;
+    //     $query      =Requetes::SELECT_user_BY_ID;
     //     try {
     //         $query  = $this->conn->prepare($query);
     //         $query->execute(['id'=>$id]);
@@ -155,7 +155,7 @@ class DaoResto {
     //         // si pas de resultat alors $row = false : var_dump($row);
     //         if($row) {
     //             $categorie = new Categorie($row->idC, $row->libelleC);
-    //             $plat = new Plat($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
+    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
     //         }
     //     }
     //     catch (\Exception $e) {
@@ -164,20 +164,27 @@ class DaoResto {
     //     catch (\Error $error) {
     //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
     //     }
-    //     return $plat;
+    //     return $user;
     // }
 
-    public function addPlat(Plat $plat) : bool {
-        if (!isset($plat)) throw new DaoException('Ce plat est inexistant',8003);
-        $query = Requetes::INSERT_PLAT;
+    public function addUser(User $user) : bool {
+        if (!isset($user)) throw new DaoException('Ce user est inexistant',8003);
+        $query = RequetesUser::INSERT_User;
         try {
             $query  = $this->conn->prepare($query);
-            $query->bindValue(':id',            $plat->getId(),             \PDO::PARAM_INT);
-            $query->bindValue(':libelle',       $plat->getLibelle(),        \PDO::PARAM_STR);
-            $query->bindValue(':prix',          $plat->getPrix(),           \PDO::PARAM_INT);
-            $query->bindValue(':composition',   $plat->getComposition(),    \PDO::PARAM_STR);
-            $query->bindValue(':pathImage',     $plat->getPathImage(),      \PDO::PARAM_STR);
-            $query->bindValue(':idCategorie',   $plat->getCategorie()->getId(), \PDO::PARAM_INT);
+            $query->bindValue(':id',            $user->getId(),             \PDO::PARAM_INT);
+            $query->bindValue(':nom_usr',       $user->getNom_usr(),        \PDO::PARAM_STR);
+            $query->bindValue(':prenom_usr',    $user->getPrenom_usr(),           \PDO::PARAM_INT);
+            $query->bindValue(':mail_usr',   $user->getMail_usr(),    \PDO::PARAM_STR);
+
+            $query->bindValue(':date_compte',            $user->getDate_Compte(),             \PDO::PARAM_INT);
+            $query->bindValue(':tel_usr',       $user->getTel_usr(),        \PDO::PARAM_STR);
+            $query->bindValue(':passw_usr',    $user->getPassw_usr(),           \PDO::PARAM_INT);
+            $query->bindValue(':ad1_usr',   $user->getAd1_usr(),    \PDO::PARAM_STR);
+            $query->bindValue(':ad2_usr',     $user->getAd2_usr(),      \PDO::PARAM_STR);
+            $query->bindValue(':code_post',     $user->getCode_Post(),      \PDO::PARAM_STR);
+
+            $query->bindValue(':type',   $user->getCategorie()->getId(), \PDO::PARAM_INT);
             $response = $query->execute();  // response = 1 (true) si OK
             return $response;
         }
@@ -190,12 +197,12 @@ class DaoResto {
     }
 
     // TODO : contrôles 
-    public function addCategorie(Categorie $categorie) {
-        $query      = Requetes::INSERT_CATEGORIE;
+    public function addCategorie(TypeUser $typeUser) {
+        $query      = RequetesUser::INSERT_CATEGORIE;
         try {
             $statement  = $this->conn->prepare($query);
-            $statement->bindValue(1, $categorie->getId());
-            $statement->bindValue(2, $categorie->getLibelle());
+            $statement->bindValue(1, $typeUser->getId());
+            $statement->bindValue(2, $typeUser->getLibelle());
             $statement->execute();
         }
         catch (\PDOException $pdoe) {
