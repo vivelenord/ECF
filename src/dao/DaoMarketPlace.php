@@ -189,10 +189,10 @@ class DaoMarketPlace {
             return $response;
         }
         catch (\Exception $e) {
-            throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+            throw new \Exception('Exception User !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
         }
         catch (\Error $error) {
-            throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
+            throw new \Exception('Error User !!! : ' .  $error->getMessage());
         }
     }
 
@@ -226,7 +226,7 @@ class DaoMarketPlace {
     }
 
     public function delCategorie(int $id) {
-        $query      = Requetes::DELETE_CATEGORIE;
+        $query      = RequetesUser::DELETE_CATEGORIE;
         try {
             $query  = $this->conn->prepare($query);
             $query->bindValue(':id', $id, \PDO::PARAM_INT);

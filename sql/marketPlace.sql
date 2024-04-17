@@ -33,7 +33,7 @@ insert into TypeUser values (2,'Client');
 
 
 insert into compte values ('1','Durand','Paul','p.durand@gmail.com',
-'2023-11-10',0622554411,'durand1122$$','Rue de la paix', 'Residence les oliviers',06000,'A','06','A0004');
+'2023-11-10',0622554411,'durand1122$$','Rue de la paix', 'Residence les oliviers',06000,'path',1);
 insert into compte values ('2','Jacques','Monnier','j.Monnier@gmail.com',
 '2023-11-11',0644554463,'jacques1122$$','Rue de la fete', 'Residence les jasmins',75011,'path',2);
 insert into compte values ('3','Patrick','Lafitte','p.Laffitte@gmail.com',
