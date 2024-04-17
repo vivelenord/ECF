@@ -121,51 +121,51 @@ class DaoMarketPlace {
 
     // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getCategorieById(int $id) : ?Categorie {
-    //     if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
-    //     $categorie = null;
-    //     $query      = Requetes::SELECT_CATEGORIE_BY_ID;
-    //     try {
-    //         $query  = $this->conn->prepare($query);
-    //         $query->execute(['id'=>$id]);
-    //         // $categorie = $query->fetchObject('Categorie');  // il faut que nom colonne sql = nom proprietes instance
-    //         $row = $query->fetch(\PDO::FETCH_OBJ);
-    //         $categorie = new Categorie($row->idC, $row->libelleC);
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $categorie;
-    // }
+    public function getCategorieById(int $id) : ?TypeUser {
+        if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
+        $categorie = null;
+        $query      = RequetesUser::SELECT_CATEGORIE_BY_ID;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->execute(['id'=>$id]);
+            // $categorie = $query->fetchObject('Categorie');  // il faut que nom colonne sql = nom proprietes instance
+            $row = $query->fetch(\PDO::FETCH_OBJ);
+            $categorie = new TypeUser($row->type, $row->lib_type);
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception User !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error User !!! : ' .  $error->getMessage());
+        }
+        return $categorie;
+    }
 
         // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getuserById(int $id) : ?user {
-    //     if (!isset($id)) throw new DaoException('Ce user est inexistant',8003);
-    //     $user       = null;
-    //     $categorie  = null;
-    //     $query      =Requetes::SELECT_user_BY_ID;
-    //     try {
-    //         $query  = $this->conn->prepare($query);
-    //         $query->execute(['id'=>$id]);
-    //         $row = $query->fetch(\PDO::FETCH_OBJ);
-    //         // si pas de resultat alors $row = false : var_dump($row);
-    //         if($row) {
-    //             $categorie = new Categorie($row->idC, $row->libelleC);
-    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $user;
-    // }
+    public function getuserById(int $id) : ?user {
+        if (!isset($id)) throw new DaoException('Ce user est inexistant',8003);
+        $user       = null;
+        $categorie  = null;
+        $query      =RequetesUser::SELECT_User_BY_ID;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->execute(['id'=>$id]);
+            $row = $query->fetch(\PDO::FETCH_OBJ);
+            // si pas de resultat alors $row = false : var_dump($row);
+            if($row) {
+                $type = new TypeUser($row->type, $row->lib_type);
+                $user = new user($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr, $row->date_compte, $row->tel_usr, $row->passw_usr, $row->ad1_usr, $row->ad2_usr, $row->code_post, $row->pathImgP, $type);
+            }
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception user !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error User !!! : ' .  $error->getMessage());
+        }
+        return $user;
+    }
 
     public function addUser(User $user) : bool {
         if (!isset($user)) throw new DaoException('Ce user est inexistant',8003);

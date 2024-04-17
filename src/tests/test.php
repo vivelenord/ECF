@@ -18,22 +18,11 @@ try {
     affiche($users);
     echo '<hr>';
 
-    // // Liste des users avec la catégorie
-    // echo'getPlatsWithCategorie() : <br>';
-    // $plats = $dao->getPlatsWithCategorie();
-    // affiche($plats);
-    // echo '<hr>';
-
 
     $categorie = new TypeUser(3,'Admin');
     $users = $dao->getTypeUser($categorie);
     affiche($users);
     echo '<hr>';
-
-    // $categorie = new TypeUser(2,'');
-    // $plats = $dao->getPlatsByCategorie($categorie);
-    // affiche($plats);
-    // echo '<hr>';
 
     $categories = $dao->getTypeUser();
     affiche($categories);
