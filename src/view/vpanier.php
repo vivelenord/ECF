@@ -13,7 +13,7 @@ echo '<p>' . $typeUser . '</p>';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
     // Si l'action est d'ajouter un article au panier
     if ($_POST["action"] === "add_to_cart" && isset($_POST["userId"]) && isset($_POST["articleId"])) {
-        $userId = $_POST["userId"];
+        $userId =  $_POST["userId"];
         $articleId = $_POST["articleId"];
         // Appeler la méthode addToCart pour ajouter l'article au panier
         $result = $daoMarketPlace->addToCart($userId, $articleId);
