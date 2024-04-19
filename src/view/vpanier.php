@@ -1,14 +1,34 @@
 <?php
-    // Inclure votre fichier contenant la classe TypeUser
-    require_once('TypeUser.php');
+// Inclure votre fichier contenant la classe TypeUser
+require_once('../metier/TypeUser.php');
 
-    // Création d'une instance de TypeUser
-    $typeUser = new PHP\metier\TypeUser(1, "Client");
 
-    // Affichage de l'objet TypeUser
-    echo '<p>' . $typeUser . '</p>';
+// Création d'une instance de TypeUser
+$typeUser = new PHP\metier\TypeUser(1, "Client");
+
+// Affichage de l'objet TypeUser
+echo '<p>' . $typeUser . '</p>';
+
+// Vérifier s'il y a une demande d'ajout au panier
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
+    // Si l'action est d'ajouter un article au panier
+    if ($_POST["action"] === "add_to_cart" && isset($_POST["userId"]) && isset($_POST["articleId"])) {
+        $userId = $_POST["userId"];
+        $articleId = $_POST["articleId"];
+        // Appeler la méthode addToCart pour ajouter l'article au panier
+        $result = $daoMarketPlace->addToCart($userId, $articleId);
+        if ($result) {
+            // Rediriger l'utilisateur vers la page du panier ou afficher un message de succès
+            // par exemple : header("Location: vpanier.php");
+            // ou : echo json_encode(array("success" => true));
+        } else {
+            // Afficher un message d'erreur
+            // par exemple : echo json_encode(array("success" => false, "message" => "Failed to add item to cart"));
+        }
+    }
+    // Ajouter d'autres conditions pour gérer d'autres actions du panier, comme la suppression d'un article, la modification de la quantité, etc.
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
