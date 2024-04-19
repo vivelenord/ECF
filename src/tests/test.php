@@ -90,7 +90,7 @@ echo "Total du panier : " . $total . "<br>";
     // addPlat
     echo 'addplat($plat) <br>';
     $ref = 103;
-    $categorie = $dao->getCategorieById(2);
+     $categorie = $dao->getCategorieById(2);
     $plat = new Plat($ref,"libelle plat $ref", 500, "composition du plat numero $ref", 'menu-item-1.png', $categorie);
     $ok = $dao->addPlat($plat);
     if ($ok) {
