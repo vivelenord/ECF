@@ -1,3 +1,14 @@
+<?php
+    // Inclure votre fichier contenant la classe TypeUser
+    require_once('TypeUser.php');
+
+    // Création d'une instance de TypeUser
+    $typeUser = new PHP\metier\TypeUser(1, "Client");
+
+    // Affichage de l'objet TypeUser
+    echo '<p>' . $typeUser . '</p>';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
