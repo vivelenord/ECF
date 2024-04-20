@@ -1,5 +1,5 @@
 <?php
-namespace restoV5b\webapp;
+namespace ECF\webapp;
 
 enum MyExceptionCase {
     case ID_MUST_BE_NUMERIC;
