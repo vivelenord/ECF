@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace PHP\webapp;
-require_once 'C:\htppd\XAMMP\htdocs\PHP\vendor\autoload.php';
+namespace ECF\webapp;
+require_once 'C:\htppd\XAMMP\htdocs\ECF\vendor\autoload.php';
 
-use PHP\dao\DaoMarketPlace;
-use PHP\webapp\DmException;
-use PHP\metier\TypeUser;
-use PHP\metier\User;
+use ECF\dao\DaoMarketPlace;
+use ECF\webapp\DmException;
+use ECF\metier\TypeUser;
+use ECF\metier\User;
 
 $message = '';
 

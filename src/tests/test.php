@@ -4,7 +4,7 @@ namespace ECF\tests;
 
 require 'C:\htppd\XAMMP\htdocs\ECF\vendor\autoload.php';
 
-use ECF\dao\DaoMarketPlace as DaoMarketPlace;
+// use ECF\dao\DaoMarketPlace as DaoMarketPlace;
 use ECF\TypeUser;
 use ECF\User;
 use ECF\DaoMarketPlace;
@@ -40,55 +40,21 @@ $panier->supprimerProduit("Produit 2"); // Supprimez le produit 2 du panier
 $total = $panier->calculerTotal();
 echo "Total du panier : " . $total . "<br>";
 
-    $users = $dao->getUsers();
-    affiche($users);
-    echo '<hr>';
+
+//Affichage des utilisateurs
+$users = $dao->getUsers();
+affiche($users);
+echo '<hr>';
 
 
-    $categorie = new TypeUser(3,'Admin');
-    $users = $dao->getTypeUser($categorie);
-    affiche($users);
-    echo '<hr>';
+$categorie = new TypeUser(3,'Admin');
+$users = $dao->getTypeUser($categorie);
+affiche($users);
+echo '<hr>';
 
-    $categories = $dao->getTypeUser();
-    affiche($categories);
-    echo '<hr>';
-
-    echo'getCategorieById(1) : ';
-    $categorie = $dao->getCategorieById(1);
-    echo "$categorie<hr>";
-
-    echo'getCategorieById(2) : ';
-    $categorie = $dao->getCategorieById(2);
-    echo "$categorie<hr>";
-
-    echo'getPlatById(1) : ';
-    $plat = $dao->getPlatById(1);
-    echo "$plat<hr>";
-
-    echo'getPlatById(7) : ';
-    $plat = $dao->getPlatById(7);
-    echo "$plat<hr>";
-
-    // plat inexistant
-    echo'getPlatById(57) : ';
-    $plat = $dao->getPlatById(57);
-    echo "$plat - ". gettype($plat) . "<hr>";
-
-
-    // addPlat
-    echo 'addplat($plat) <br>';
-    $ref = 103;
-     $categorie = $dao->getCategorieById(2);
-    $plat = new Plat($ref,"libelle plat $ref", 500, "composition du plat numero $ref", 'menu-item-1.png', $categorie);
-    $ok = $dao->addPlat($plat);
-    if ($ok) {
-        $plats = $dao->getPlatsWithCategorie();
-        affiche($plats);
-    }
-    echo "<hr>";
-
- 
+$categories = $dao->getTypeUser();
+affiche($categories);
+echo '<hr>';
 
 } catch (\Exception $e) {
     echo("DM Test!! " . $e->getMessage() . ' ' . $e->getCode());
