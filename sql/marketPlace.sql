@@ -24,6 +24,50 @@ create table if not exists User(
     
 ) engine=InnoDB;
 
+create table categorie (
+    id_categorie INT PRIMARY KEY,
+    libelle_categorie VARCHAR(100) NOT NULL 
+
+) engine=InnoDB;
+   
+create table article(
+    id_article INT PRIMARY KEY AUTO_INCREMENT,
+   	libelle_article VARCHAR(100) NOT NULL,
+	qte_stock INT NOT NULL,
+	prix_article DECIMAL(10,2) NOT NULL,
+	description_article VARCHAR(255) NULL,
+	id_categorie INT,
+	FOREIGN KEY (id_categorie) REFERENCES categorie(id_categorie)
+
+) engine=InnoDB;
+
+create table panier (   
+    id_panier INT PRIMARY KEY AUTO_INCREMENT,
+	date_panier DATE NOT NULL,
+	heure_panier TIME NOT NULL,
+	id_user INT,
+	FOREIGN KEY (id_user) REFERENCES compte(id_user)
+
+) engine=InnoDB;
+
+   create table mettre (
+    id_panier INT,
+	id_article INT,
+	FOREIGN KEY (id_panier) REFERENCES panier(id_panier),
+	FOREIGN KEY (id_article) REFERENCES article(id_article)
+
+) engine=InnoDB;
+
+create table commande( 
+    id_commande INT PRIMARY KEY AUTO_INCREMENT,
+	date_commande DATE NOT NULL,
+	total_commande DECIMAL(10,2) NOT NULL,
+	mode_livraison VARCHAR(100) NOT NULL,
+	moyen_paiement VARCHAR(50) NOT NULL,
+	id_user INT,
+	FOREIGN KEY (id_user) REFERENCES user(id_user)
+
+) engine=InnoDB;
 
 
 
@@ -48,3 +92,15 @@ insert into compte values ('7','Isabelle','Leroi','i.leroi@gmail.com',
 '2023-11-13',0621546522,'isabelle1122$$','Rue du bordeaux', 'Residence les omelettes',75012,'path',2);
 insert into compte values ('8','Samira','jacson','s.jacson@gmail.com',
 '2024-01-04',0665222154,'belleisa1122$$','Rue du coca', 'Residence les cola',13010,'path',1);
+
+
+insert into article (libelle_article, qte_stock, prix_article, description_article, id_categorie)
+values ('Vase', 10, 19.99, 'Vase en porcelaine', 1);
+insert into article (libelle_article, qte_stock, prix_article, description_article, id_categorie) 
+values ('Mug Geek', 5, 12.50, 'Mug humoristique pour les passionnés de technologie', 3);
+insert into panier (date_panier, heure_panier, id_compte)
+values (CURDATE(), CURTIME(), id_compte);  
+insert into mettre (id_panier, id_article)
+values (1, 2);  
+insert into mettre (id_panier, id_article)
+values (1, 1);  
