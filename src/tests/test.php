@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
-namespace PHP\tests;
+namespace ECF\tests;
 
-require 'C:\htppd\XAMMP\htdocs\PHP\vendor\autoload.php';
+require 'C:\htppd\XAMMP\htdocs\ECF\vendor\autoload.php';
 
-use PHP\dao\DaoMarketPlace as DaoMarketPlace;
-use PHP\TypeUser;
-use PHP\User;
-use PHP\DaoMarketPlace;
-use PHP\metier\TypeUser as MetierTypeUser;
-use PHP\Panier;
+use ECF\dao\DaoMarketPlace as DaoMarketPlace;
+use ECF\TypeUser;
+use ECF\User;
+use ECF\DaoMarketPlace;
+use ECF\metier\TypeUser as MetierTypeUser;
+use ECF\Panier;
 
 
 // on instancie la couche de persistance
