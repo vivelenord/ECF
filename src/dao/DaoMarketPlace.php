@@ -48,53 +48,6 @@ class DaoMarketPlace {
         return $users;
     }
 
-    // public function getusersWithCategorie() : ? array {
-    //     $users = array();
-    //     $query      = RequetesUser::SELECT_user_WITH_CATEGORIE;
-    //     try {
-    //         $cursor  = $this->conn->query($query);
-    //         // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
-    //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-    //             $type = new TypeUser($row->idC, $row->libelleC);
-    //             $user = new User($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($users,$user);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $users;
-    // }
-
-    // TODO : contrôles 
-    // TODO : gestion des erreurs
-    // public function getusersByCategorie(Categorie $categorie) : ? array{
-    //     if (!isset($categorie)) throw new DaoException('Cette categorie est inexistante',8002);
-    //     $query      = Requetes::SELECT_user_BY_CATEGORIE;
-    //     try {
-    //         $cursor  = $this->conn->prepare($query);
-    //         $cursor->bindValue(1, $categorie->getId());
-    //         $cursor->execute();
-    //         // autre syntaxe
-    //         // $cursor->execute([$categorie->getId()]);
-    //         $users=[];
-    //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($users,$user);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $users;
-    // }
-
         /**
      * Retourne la liste des users de la BDD
      *
