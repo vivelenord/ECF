@@ -2,13 +2,12 @@
 declare(strict_types=1);
 namespace ECF\tests;
 
-require 'C:\htppd\XAMMP\htdocs\ECF\vendor\autoload.php';
+require 'C:\Users\franc\Downloads\Formation DWWM\projet\Depot dossier groupe metis 28Janvier 2024\temp\DepotJsGitHub\ECF\vendor\autoload.php';
 
 // use ECF\dao\DaoMarketPlace as DaoMarketPlace;
-use ECF\TypeUser;
-use ECF\User;
-use ECF\DaoMarketPlace;
-use ECF\metier\TypeUser as MetierTypeUser;
+use ECF\metier\User;
+use ECF\dao\DaoMarketPlace;
+use ECF\metier\TypeUser;
 use ECF\Panier;
 
 
@@ -42,34 +41,43 @@ echo "Total du panier : " . $total . "<br>";
 
 
 //Affichage des utilisateurs
-$users = $dao->getUsers();
+$users = $market->getUsers();
 affiche($users);
 echo '<hr>';
 
 
-$categorie = new TypeUser(3,'Admin');
-$users = $dao->getTypeUser($categorie);
-affiche($users);
+$typeuser = new TypeUser(3,'Admin');
+$Types = $market->getTypeUser($typeuser);
+affiche($Types);
 echo '<hr>';
 
-$categories = $dao->getTypeUser();
-affiche($categories);
+$typeusers = $market->getTypeUser();
+affiche($typeusers);
 echo '<hr>';
 
 } catch (\Exception $e) {
-    echo("DM Test!! " . $e->getMessage() . ' ' . $e->getCode());
+    echo("Test!! " . $e->getMessage() . ' ' . $e->getCode());
 } catch (\Error $e) {
-    echo("DM Test!! " . $e->getMessage() . ' ' .  $e->getCode());
+    echo("Test!! " . $e->getMessage() . ' ' .  $e->getCode());
 }
+// addUser
+echo 'addUser($user) <br>';
+$typeuser = new TypeUser(3,'Admin');
+// $type = $market->getTypeUser($typeuser);
+// $type = 1;
+$ref=30;
+$user = new User($ref,"Marc", "Marc","Marc","Marc",0111111111,"Marc","Marc","Marc",06000,"path", $typeuser);
+$ok = $market->addUser($user);
+if ($ok) {
+    $users = $market->getUsers();
+    affiche($users);
+}
+echo "<hr>";
 
 
-
-
-
-
-function affiche($plats) : void {
-    foreach ($plats as $plat) {
-        echo $plat;
+function affiche($users) : void {
+    foreach ($users as $user) {
+        echo $user;
         echo '<br>';
     }
 }
