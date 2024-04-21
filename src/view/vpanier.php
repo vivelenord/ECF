@@ -4,7 +4,7 @@ require_once('../metier/TypeUser.php');
 
 
 // Création d'une instance de TypeUser
-$typeUser = new PHP\metier\TypeUser(1, "Client");
+$typeUser = new ECF\metier\TypeUser(1, "Client");
 
 // Affichage de l'objet TypeUser
 echo '<p>' . $typeUser . '</p>';
