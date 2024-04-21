@@ -149,7 +149,8 @@ class DaoMarketPlace {
             throw new \Exception('Error User !!! : ' .  $error->getMessage());
         }
     }
-public function addToCart(int $userId, int $articleId): bool {
+    
+    public function addToCart(int $userId, int $articleId): bool {
     $query = "INSERT INTO panier (id_user) VALUES (:userId)";
     try {
         $statement = $this->conn->prepare($query);
@@ -168,7 +169,7 @@ public function addToCart(int $userId, int $articleId): bool {
     }
 }
 
-public function removeFromCart(int $panierId, int $articleId): bool {
+    public function removeFromCart(int $panierId, int $articleId): bool {
     $query = "DELETE FROM mettre WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -182,7 +183,7 @@ public function removeFromCart(int $panierId, int $articleId): bool {
     }
 }
 
-public function getCartContents(int $userId): array {
+    public function getCartContents(int $userId): array {
     $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
     try {
         $statement = $this->conn->prepare($query);
@@ -195,7 +196,7 @@ public function getCartContents(int $userId): array {
     }
 }
 
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -209,7 +210,7 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -223,7 +224,7 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
