@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace PHP\metier;
+namespace ECF\metier;
 
 use PhpParser\Node\Expr\Cast\String_;
-use PHP\metier\TypeUser;
+use ECF\metier\TypeUser;
 
 class User {
     private int             $id;

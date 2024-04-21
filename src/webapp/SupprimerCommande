@@ -8,7 +8,7 @@ if (isset($_GET['commande_id'])) {
     $commande_id = $_GET['commande_id'];
 
     // Créer une instance de la classe Commande à partir de son identifiant
-    $commande = PHP\metier\Commande::recupererParId($commande_id);
+    $commande = ECF\metier\Commande::recupererParId($commande_id);
 
     // Vérifier si la commande existe
     if ($commande) {
