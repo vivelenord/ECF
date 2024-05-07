@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace PHP\webapp;
+namespace ECF\webapp;
 
-require 'C:\htppd\XAMMP\htdocs\PHP\vendor\autoload.php';
+require 'C:\Users\franc\Downloads\Formation DWWM\projet\Depot dossier groupe metis 28Janvier 2024\temp\DepotJsGitHub\ECF\vendor\autoload.php';
 include '../view/vCreationCompteV2.php';

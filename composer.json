@@ -1,0 +1,15 @@
+{
+    "name": "franc/ecf",
+    "autoload": {
+        "psr-4": {
+            "ECF\\": "C:\\Users\\franc\\Downloads\\Formation DWWM\\projet\\Depot dossier groupe metis 28Janvier 2024\\temp\\DepotJsGitHub\\ECF\\src"
+        }
+    },
+    "authors": [
+        {
+            "name": "François Selmi",
+            "email": "francois.selmi@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace PHP\dao;
+namespace ECF\dao;
 
+<<<<<<< HEAD
 use PHP\dao\DatabaseUser;
 use PHP\dao\RequetesUser;
 use PHP\dao\RequetesPanier;
@@ -9,6 +10,15 @@ use PHP\metier\TypeUser;
 use PHP\metier\User;
 use PHP\webapp\DmException;
 use PHP\webapp\MyExceptionCase;
+=======
+use ECF\dao\DatabaseUser;
+use ECF\dao\RequetesUser;
+use ECF\dao\RequetesPanier;
+use ECF\metier\TypeUser;
+use ECF\metier\User;
+use ECF\webapp\DmException;
+use ECF\webapp\MyExceptionCase;
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
 
 //TODO : gestion des exceptions
 class DaoMarketPlace {
@@ -35,7 +45,8 @@ class DaoMarketPlace {
             $cursor  = $this->conn->query($query);
             // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
             while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-                $user = new User($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr,$row->date_compte, $row->tel_usr,$row->passw_usr,$row->ad1_usr,$row->ad2_usr,$row->code_post, $row->pathImgP, $row->type);
+                $typeUser = $this->getTypeUserById($row->type);
+                $user = new User($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr,$row->date_compte, $row->tel_usr,$row->passw_usr,$row->ad1_usr,$row->ad2_usr,$row->code_post, $row->pathImgP, $typeUser);
                 array_push($users,$user);
             }
         }
@@ -47,53 +58,6 @@ class DaoMarketPlace {
         }
         return $users;
     }
-
-    // public function getusersWithCategorie() : ? array {
-    //     $users = array();
-    //     $query      = RequetesUser::SELECT_user_WITH_CATEGORIE;
-    //     try {
-    //         $cursor  = $this->conn->query($query);
-    //         // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
-    //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-    //             $type = new TypeUser($row->idC, $row->libelleC);
-    //             $user = new User($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($users,$user);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $users;
-    // }
-
-    // TODO : contrôles 
-    // TODO : gestion des erreurs
-    // public function getusersByCategorie(Categorie $categorie) : ? array{
-    //     if (!isset($categorie)) throw new DaoException('Cette categorie est inexistante',8002);
-    //     $query      = Requetes::SELECT_user_BY_CATEGORIE;
-    //     try {
-    //         $cursor  = $this->conn->prepare($query);
-    //         $cursor->bindValue(1, $categorie->getId());
-    //         $cursor->execute();
-    //         // autre syntaxe
-    //         // $cursor->execute([$categorie->getId()]);
-    //         $users=[];
-    //         while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
-    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //             array_push($users,$user);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $users;
-    // }
 
         /**
      * Retourne la liste des users de la BDD
@@ -122,51 +86,51 @@ class DaoMarketPlace {
 
     // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getCategorieById(int $id) : ?Categorie {
-    //     if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
-    //     $categorie = null;
-    //     $query      = Requetes::SELECT_CATEGORIE_BY_ID;
-    //     try {
-    //         $query  = $this->conn->prepare($query);
-    //         $query->execute(['id'=>$id]);
-    //         // $categorie = $query->fetchObject('Categorie');  // il faut que nom colonne sql = nom proprietes instance
-    //         $row = $query->fetch(\PDO::FETCH_OBJ);
-    //         $categorie = new Categorie($row->idC, $row->libelleC);
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $categorie;
-    // }
+    public function getTypeUserById(int $id) : ?TypeUser {
+        if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
+        $categorie = null;
+        $query      = RequetesUser::SELECT_CATEGORIE_BY_ID;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->execute(['id'=>$id]);
+            // $categorie = $query->fetchObject('Categorie');  // il faut que nom colonne sql = nom proprietes instance
+            $row = $query->fetch(\PDO::FETCH_OBJ);
+            $categorie = new TypeUser($row->type, $row->lib_type);
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception User !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error User !!! : ' .  $error->getMessage());
+        }
+        return $categorie;
+    }
 
         // TODO : contrôles 
     // TODO : gestion des erreurs
-    // public function getuserById(int $id) : ?user {
-    //     if (!isset($id)) throw new DaoException('Ce user est inexistant',8003);
-    //     $user       = null;
-    //     $categorie  = null;
-    //     $query      =Requetes::SELECT_user_BY_ID;
-    //     try {
-    //         $query  = $this->conn->prepare($query);
-    //         $query->execute(['id'=>$id]);
-    //         $row = $query->fetch(\PDO::FETCH_OBJ);
-    //         // si pas de resultat alors $row = false : var_dump($row);
-    //         if($row) {
-    //             $categorie = new Categorie($row->idC, $row->libelleC);
-    //             $user = new user($row->idP, $row->libelleP, $row->prixP, $row->compoP, $row->pathImgP, $categorie);
-    //         }
-    //     }
-    //     catch (\Exception $e) {
-    //         throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
-    //     }
-    //     catch (\Error $error) {
-    //         throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
-    //     }
-    //     return $user;
-    // }
+    public function getuserById(int $id) : ?user {
+        if (!isset($id)) throw new DaoException('Ce user est inexistant',8003);
+        $user       = null;
+        $categorie  = null;
+        $query      =RequetesUser::SELECT_User_BY_ID;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->execute(['id'=>$id]);
+            $row = $query->fetch(\PDO::FETCH_OBJ);
+            // si pas de resultat alors $row = false : var_dump($row);
+            if($row) {
+                $type = new TypeUser($row->type, $row->lib_type);
+                $user = new user($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr, $row->date_compte, $row->tel_usr, $row->passw_usr, $row->ad1_usr, $row->ad2_usr, $row->code_post, $row->pathImgP, $type);
+            }
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception user !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error User !!! : ' .  $error->getMessage());
+        }
+        return $user;
+    }
 
     public function addUser(User $user) : bool {
         if (!isset($user)) throw new DaoException('Ce user est inexistant',8003);
@@ -184,7 +148,7 @@ class DaoMarketPlace {
             $query->bindValue(':ad1_usr',   $user->getAd1_usr(),    \PDO::PARAM_STR);
             $query->bindValue(':ad2_usr',     $user->getAd2_usr(),      \PDO::PARAM_STR);
             $query->bindValue(':code_post',     $user->getCode_Post(),      \PDO::PARAM_STR);
-
+            $query->bindValue(':pathImgP',     $user->getPathImage(),      \PDO::PARAM_STR);
             $query->bindValue(':type',   $user->getCategorie()->getId(), \PDO::PARAM_INT);
             $response = $query->execute();  // response = 1 (true) si OK
             return $response;
@@ -196,7 +160,51 @@ class DaoMarketPlace {
             throw new \Exception('Error User !!! : ' .  $error->getMessage());
         }
     }
+<<<<<<< HEAD
 public function addToCart(int $userId, int $articleId): bool {
+=======
+    public function getCategorieById(int $id) : ?TypeUser {
+        if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
+        $categorie = null;
+        $query      = RequetesUser::SELECT_CATEGORIE_BY_ID;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->execute(['id'=>$id]);
+            // $categorie = $query->fetchObject('Categorie');  // il faut que nom colonne sql = nom proprietes instance
+            $row = $query->fetch(\PDO::FETCH_OBJ);
+            $typeuser = new TypeUser($row->type, $row->lib_type);
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception Cat !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error Cat !!! : ' .  $error->getMessage());
+        }
+        return $typeuser;
+    }
+    public function getUsersWithCategorie() : ? array {
+        $users = array();
+        $query      = RequetesUser::SELECT_User_WITH_CATEGORIE;
+        try {
+            $cursor  = $this->conn->query($query);
+            // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
+            while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
+                $categorie = new TypeUser($row->type, $row->lib_type);
+                $user = new User($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr, $row->date_compte, $row->tel_usr, $row->passw_usr, $row->ad1_usr, $row->ad2_usr, $row->code_post, $row->pathImgP, $categorie);
+                array_push($users,$user);
+            }
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception Cat !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error Cat !!! : ' .  $error->getMessage());
+        }
+        return $users;
+    }
+    
+    public function addToCart(int $userId, int $articleId): bool {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "INSERT INTO panier (id_user) VALUES (:userId)";
     try {
         $statement = $this->conn->prepare($query);
@@ -215,7 +223,11 @@ public function addToCart(int $userId, int $articleId): bool {
     }
 }
 
+<<<<<<< HEAD
 public function removeFromCart(int $panierId, int $articleId): bool {
+=======
+    public function removeFromCart(int $panierId, int $articleId): bool {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "DELETE FROM mettre WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -229,7 +241,11 @@ public function removeFromCart(int $panierId, int $articleId): bool {
     }
 }
 
+<<<<<<< HEAD
 public function getCartContents(int $userId): array {
+=======
+    public function getCartContents(int $userId): array {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
     try {
         $statement = $this->conn->prepare($query);
@@ -242,7 +258,11 @@ public function getCartContents(int $userId): array {
     }
 }
 
+<<<<<<< HEAD
 public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+=======
+    public function updateCartItemQuantityV1(int $panierId, int $articleId, int $quantity): bool {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -256,7 +276,11 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
+<<<<<<< HEAD
 public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+=======
+    public function updateCartItemQuantityV2(int $panierId, int $articleId, int $quantity): bool {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -270,7 +294,11 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
+<<<<<<< HEAD
 public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+=======
+    public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -302,7 +330,7 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
             switch ($pdoe->errorInfo[1]) {
                 case 1062:
                     if (str_contains($pdoe->errorInfo[2],"PRIMARY")) throw new DmException(MyExceptionCase::ID_DOUBLON);
-                    if (str_contains($pdoe->errorInfo[2],"libelleC"))throw new DmException(MyExceptionCase::LIBELLE_DOUBLON);
+                    if (str_contains($pdoe->errorInfo[2],"lib_type"))throw new DmException(MyExceptionCase::LIBELLE_DOUBLON);
                 default:
                     throw $pdoe;
             } 
@@ -317,6 +345,31 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
 
     public function delCategorie(int $id) {
         $query      = RequetesUser::DELETE_CATEGORIE;
+        try {
+            $query  = $this->conn->prepare($query);
+            $query->bindValue(':id', $id, \PDO::PARAM_INT);
+            $query->execute();
+        }
+        catch (\PDOException $pdoe) {
+            // echo 'Erreur PDO : ' . $pdoe->getCode();
+            // echo '<br>';
+            // print_r ($pdoe->errorInfo);
+            switch ($pdoe->errorInfo[1]) {
+                case 1451:
+                    if (str_contains($pdoe->errorInfo[2],"FOREIGN KEY")) throw new DmException(MyExceptionCase::CATEGORIE_USE);
+                default:
+                    throw $pdoe;
+            }
+        } 
+        catch (\Exception $e) {
+            throw $e;
+        }
+        catch (\Error $error) {
+            throw $error;
+        } 
+    }
+    public function delUser(int $id) {
+        $query      = RequetesUser::DELETE_User;
         try {
             $query  = $this->conn->prepare($query);
             $query->bindValue(':id', $id, \PDO::PARAM_INT);

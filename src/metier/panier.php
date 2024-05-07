@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-namespace PHP\metier;
-
+namespace ECF\metier;
+  
 class Panier {
     private array $articles;
 
@@ -17,5 +17,4 @@ class Panier {
         return $this->articles;
     }
 }
-?>
 

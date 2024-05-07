@@ -10,13 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $produits = $_POST['produits']; // Si les produits sont sélectionnés dans le formulaire
 
     // Créer une instance de la classe Commande
-    $commande = new PHP\metier\Commande($client);
+    $commande = new ECF\metier\Commande($client);
 
     // Si des produits sont sélectionnés dans le formulaire, ajoutez-les à la commande
     if (!empty($produits)) {
         foreach ($produits as $produit) {
             // Créer une instance de la classe Produit (si nécessaire)
-            $produit = new PHP\metier\Produit($produit['id'], $produit['nom'], $produit['prix']); // Utilisez les données réelles du produit
+            $produit = new ECF\metier\Produit($produit['id'], $produit['nom'], $produit['prix']); // Utilisez les données réelles du produit
             // Ajouter le produit à la commande
             $commande->ajouterProduit($produit);
         }
