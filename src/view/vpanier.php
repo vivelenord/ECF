@@ -1,11 +1,19 @@
 <?php
 // Inclure votre fichier contenant la classe TypeUser
+<<<<<<< HEAD
+require_once('TypeUser.php');
+
+// Création d'une instance de TypeUser
+$typeUser = new PHP\metier\TypeUser(1, "Client");
+
+=======
 require_once('../metier/TypeUser.php');
 
 
 // Création d'une instance de TypeUser
 $typeUser = new ECF\metier\TypeUser(1, "Client");
 
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
 // Affichage de l'objet TypeUser
 echo '<p>' . $typeUser . '</p>';
 
@@ -13,7 +21,11 @@ echo '<p>' . $typeUser . '</p>';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
     // Si l'action est d'ajouter un article au panier
     if ($_POST["action"] === "add_to_cart" && isset($_POST["userId"]) && isset($_POST["articleId"])) {
+<<<<<<< HEAD
+        $userId = $_POST["userId"];
+=======
         $userId =  $_POST["userId"];
+>>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
         $articleId = $_POST["articleId"];
         // Appeler la méthode addToCart pour ajouter l'article au panier
         $result = $daoMarketPlace->addToCart($userId, $articleId);
