@@ -4,6 +4,7 @@ namespace PHP\dao;
 
 use PHP\dao\DatabaseUser;
 use PHP\dao\RequetesUser;
+use PHP\dao\RequetesPanier;
 use PHP\metier\TypeUser;
 use PHP\metier\User;
 use PHP\webapp\DmException;
@@ -195,6 +196,95 @@ class DaoMarketPlace {
             throw new \Exception('Error User !!! : ' .  $error->getMessage());
         }
     }
+public function addToCart(int $userId, int $articleId): bool {
+    $query = "INSERT INTO panier (id_user) VALUES (:userId)";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':userId', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+        $panierId = $this->conn->lastInsertId(); // Récupérer l'ID du panier nouvellement créé
+        $query = "INSERT INTO mettre (id_panier, id_article) VALUES (:panierId, :articleId)";
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':panierId', $panierId, \PDO::PARAM_INT);
+        $statement->bindParam(':articleId', $articleId, \PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return false;
+    }
+}
+
+public function removeFromCart(int $panierId, int $articleId): bool {
+    $query = "DELETE FROM mettre WHERE id_panier = :panierId AND id_article = :articleId";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':panierId', $panierId, \PDO::PARAM_INT);
+        $statement->bindParam(':articleId', $articleId, \PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return false;
+    }
+}
+
+public function getCartContents(int $userId): array {
+    $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':userId', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return [];
+    }
+}
+
+public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':panierId', $panierId, \PDO::PARAM_INT);
+        $statement->bindParam(':articleId', $articleId, \PDO::PARAM_INT);
+        $statement->bindParam(':quantity', $quantity, \PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return false;
+    }
+}
+public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':panierId', $panierId, \PDO::PARAM_INT);
+        $statement->bindParam(':articleId', $articleId, \PDO::PARAM_INT);
+        $statement->bindParam(':quantity', $quantity, \PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return false;
+    }
+}
+public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
+    $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
+    try {
+        $statement = $this->conn->prepare($query);
+        $statement->bindParam(':panierId', $panierId, \PDO::PARAM_INT);
+        $statement->bindParam(':articleId', $articleId, \PDO::PARAM_INT);
+        $statement->bindParam(':quantity', $quantity, \PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (\PDOException $e) {
+        // Gérer les erreurs de base de données
+        return false;
+    }
+}
+
 
     // TODO : contrôles 
     public function addCategorie(TypeUser $typeUser) {
