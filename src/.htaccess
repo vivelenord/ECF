@@ -1,0 +1,19 @@
+RewriteEngine On
+RewriteBase /FS/POO/ECF/
+
+# pour le fun
+# a tester avec http://localhost/travailDM/6-phpMVC/demofavoris/src4/salut
+#RewriteRule ^salut$ index.php
+# a tester avec http://localhost/travailDM/6-phpMVC/demofavoris/src4/rubrique/add/21
+#RewriteRule ^rubrique/([a-z0-9-]+)/([0-9]+)$ index.php?action=$1&id=$2
+
+#la regle vraiment necessaire
+# L : on ne passe pas a une autre regle si celle ci est validee
+# QSA si il y a des parametres de type ?xx=yy alors ils sont conservés
+RewriteRule ^(.+)$ index.php [QSA,L]
+
+# a etudier
+#si ce n'est pas un répertoire
+#RewriteCond %{REQUEST_FILENAME} !-d
+# Si ce n'est pas un fichier
+#RewriteCond %{REQUEST_FILENAME} !-f

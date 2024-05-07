@@ -5,6 +5,8 @@ namespace ECF\dao;
 use ECF\dao\DatabaseUser;
 use ECF\dao\RequetesUser;
 use ECF\dao\RequetesPanier;
+use ECF\metier\Article;
+use ECF\metier\Panier;
 use ECF\metier\TypeUser;
 use ECF\metier\User;
 use ECF\webapp\DmException;
@@ -47,10 +49,11 @@ class DaoMarketPlace {
             throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
         }
         return $users;
+        echo $users;
     }
 
         /**
-     * Retourne la liste des users de la BDD
+     * Retourne la liste des type users de la BDD
      *
      * @return array : Tableau d'objets de type user
      */
@@ -122,6 +125,12 @@ class DaoMarketPlace {
         return $user;
     }
 
+    public static function stringToDate(string $date)  {
+        $datet = strtotime($date);
+        $laDate = date('Y-m-d', $datet);
+        return $laDate;
+    }
+
     public function addUser(User $user) : bool {
         if (!isset($user)) throw new DaoException('Ce user est inexistant',8003);
         $query = RequetesUser::INSERT_User;
@@ -129,10 +138,10 @@ class DaoMarketPlace {
             $query  = $this->conn->prepare($query);
             $query->bindValue(':id',            $user->getId(),             \PDO::PARAM_INT);
             $query->bindValue(':nom_usr',       $user->getNom_usr(),        \PDO::PARAM_STR);
-            $query->bindValue(':prenom_usr',    $user->getPrenom_usr(),           \PDO::PARAM_INT);
+            $query->bindValue(':prenom_usr',    $user->getPrenom_usr(),           \PDO::PARAM_STR);
             $query->bindValue(':mail_usr',   $user->getMail_usr(),    \PDO::PARAM_STR);
 
-            $query->bindValue(':date_compte',            $user->getDate_Compte(),             \PDO::PARAM_INT);
+            $query->bindValue(':date_compte',            $this->stringToDate($user->getDate_Compte()));
             $query->bindValue(':tel_usr',       $user->getTel_usr(),        \PDO::PARAM_STR);
             $query->bindValue(':passw_usr',    $user->getPassw_usr(),           \PDO::PARAM_INT);
             $query->bindValue(':ad1_usr',   $user->getAd1_usr(),    \PDO::PARAM_STR);
@@ -223,18 +232,104 @@ class DaoMarketPlace {
     }
 }
 
-    public function getCartContents(int $userId): array {
-    $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
-    try {
-        $statement = $this->conn->prepare($query);
-        $statement->bindParam(':userId', $userId, \PDO::PARAM_INT);
-        $statement->execute();
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
-    } catch (\PDOException $e) {
-        // Gérer les erreurs de base de données
-        return [];
+// retourner un panier avec ses
+    public function getCartContents(int $userId): Panier {
+
+        $panier = null;
+        // recuperer le user
+        $user = $this->getuserById($userId);
+
+        $query = "SELECT pa.id_panier,  ar.id_article, ar.libelle_article, ar.prix_article "
+        . " FROM panier pa JOIN mettre ON pa.id_panier = mettre.id_panier "
+        . " JOIN article ar ON mettre.id_article = ar.id_article WHERE pa.id_user = :userId";
+        try {
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(':userId', $userId, \PDO::PARAM_INT);  // 1   1 lib1 9.50
+            $statement->execute();                                       // 1   2 lib2 10
+
+                // je veux rester objet
+            $row = $statement->fetch(\PDO::FETCH_OBJ);
+            $panier = new Panier($row->id_panier, $user);
+
+            $prix = (float)$row->prix_article;
+            // echo gettype($prix);
+            // echo($prix);
+            // echo '<br>';
+
+            // public function __construct(int $id, string $libelle, float $prix, string $description, ? string $image = '') {
+            $article = new Article($row->id_article, $row->libelle_article, $prix, '', '');
+
+            $panier->ajouterArticle($article);
+        
+            while( $row = $statement->fetch(\PDO::FETCH_OBJ)) {
+                $prix = (float)$row->prix_article;
+                $article = new Article($row->id_article, $row->libelle_article, $prix, '', '');
+                $panier->ajouterArticle($article);
+            }
+        } catch (\PDOException $e) {
+            // Gérer les erreurs de base de données
+            var_dump($e);
+        }
+        return $panier;
     }
-}
+
+    public function getCartById(int $idpanier): Panier {
+
+        $panier = null;
+        // recuperer le user // TODO rendre dynamique
+        $user = $this->getuserById(1);
+
+        $query = "SELECT pa.id_panier,  ar.id_article, ar.libelle_article, ar.prix_article "
+        . " FROM panier pa JOIN mettre ON pa.id_panier = mettre.id_panier "
+        . " JOIN article ar ON mettre.id_article = ar.id_article WHERE pa.id_panier = :idpanier";
+        try {
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(':idpanier', $idpanier, \PDO::PARAM_INT);  // 1   1 lib1 9.50
+            $statement->execute();                                       // 1   2 lib2 10
+
+                // je veux rester objet
+            $row = $statement->fetch(\PDO::FETCH_OBJ);
+            $panier = new Panier($row->id_panier, $user);
+
+            $prix = (float)$row->prix_article;
+            // echo gettype($prix);
+            // echo($prix);
+            // echo '<br>';
+
+            // public function __construct(int $id, string $libelle, float $prix, string $description, ? string $image = '') {
+            $article = new Article($row->id_article, $row->libelle_article, $prix, '', '');
+
+            $panier->ajouterArticle($article);
+        
+            while( $row = $statement->fetch(\PDO::FETCH_OBJ)) {
+                $prix = (float)$row->prix_article;
+                $article = new Article($row->id_article, $row->libelle_article, $prix, '', '');
+                $panier->ajouterArticle($article);
+            }
+        } catch (\PDOException $e) {
+            // Gérer les erreurs de base de données
+            var_dump($e);
+        }
+        return $panier;
+    }
+
+    public function getCartContentsOld(int $userId): array {
+
+        $liste = [];
+
+        $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
+        try {
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(':userId', $userId, \PDO::PARAM_INT);
+            $statement->execute();
+            $liste =  $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            // Gérer les erreurs de base de données
+
+        }
+
+        return $liste;
+    }
 
     public function updateCartItemQuantityV1(int $panierId, int $articleId, int $quantity): bool {
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
