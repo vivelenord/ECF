@@ -2,7 +2,7 @@
     "name": "franc/ecf",
     "autoload": {
         "psr-4": {
-            "ECF\\": "C:\\Users\\franc\\Downloads\\Formation DWWM\\projet\\Depot dossier groupe metis 28Janvier 2024\\temp\\DepotJsGitHub\\ECF\\src"
+            "ECF\\": "C:\\htppd\\XAMMP\\htdocs\\FS\\POO\\ECF\\src"
         }
     },
     "authors": [

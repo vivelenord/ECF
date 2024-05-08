@@ -49,7 +49,7 @@ class DaoMarketPlace {
             throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
         }
         return $users;
-        echo $users;
+        // echo $users;
     }
 
         /**
@@ -159,9 +159,6 @@ class DaoMarketPlace {
             throw new \Exception('Error User !!! : ' .  $error->getMessage());
         }
     }
-<<<<<<< HEAD
-public function addToCart(int $userId, int $articleId): bool {
-=======
     public function getCategorieById(int $id) : ?TypeUser {
         if (!isset($id)) throw new DaoException('Cette categorie est inexistante',8002);
         $categorie = null;
@@ -203,7 +200,6 @@ public function addToCart(int $userId, int $articleId): bool {
     }
     
     public function addToCart(int $userId, int $articleId): bool {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "INSERT INTO panier (id_user) VALUES (:userId)";
     try {
         $statement = $this->conn->prepare($query);
@@ -222,11 +218,7 @@ public function addToCart(int $userId, int $articleId): bool {
     }
 }
 
-<<<<<<< HEAD
-public function removeFromCart(int $panierId, int $articleId): bool {
-=======
     public function removeFromCart(int $panierId, int $articleId): bool {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "DELETE FROM mettre WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -240,11 +232,7 @@ public function removeFromCart(int $panierId, int $articleId): bool {
     }
 }
 
-<<<<<<< HEAD
-public function getCartContents(int $userId): array {
-=======
     public function getCartContents(int $userId): array {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "SELECT article.id_article, article.libelle_article, article.prix_article FROM panier JOIN mettre ON panier.id_panier = mettre.id_panier JOIN article ON mettre.id_article = article.id_article WHERE panier.id_user = :userId";
     try {
         $statement = $this->conn->prepare($query);
@@ -257,11 +245,7 @@ public function getCartContents(int $userId): array {
     }
 }
 
-<<<<<<< HEAD
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
-=======
     public function updateCartItemQuantityV1(int $panierId, int $articleId, int $quantity): bool {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -275,11 +259,7 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
-<<<<<<< HEAD
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
-=======
     public function updateCartItemQuantityV2(int $panierId, int $articleId, int $quantity): bool {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
@@ -293,11 +273,7 @@ public function updateCartItemQuantity(int $panierId, int $articleId, int $quant
         return false;
     }
 }
-<<<<<<< HEAD
-public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
-=======
     public function updateCartItemQuantity(int $panierId, int $articleId, int $quantity): bool {
->>>>>>> 45e01acb35822d06e0d7bfd8e937ba6306d7bfc5
     $query = "UPDATE mettre SET quantite = :quantity WHERE id_panier = :panierId AND id_article = :articleId";
     try {
         $statement = $this->conn->prepare($query);
