@@ -26,19 +26,14 @@ class CntrlMarketPlace {
 
     public function getUsers() : void {
         $users = $this->daoMarketPlace->getUsers(); 
-        // echo 'helllooo';   
-        // $users = $daoMarketPlace->getUsers();     
-
         require './view/viewuser/vusers.php';
-        // $users = $market->getUsers();
-        // affiche($users);
     }
     public function getUserJson() : void {
         $content = array();
         $users = $this->daoMarketPlace->getUsers();
         $content = json_encode($users);
               
-        require './view/rubriques/vrubriquesjson.php'; // a modifier
+        require './view/users/vusersjson.php'; // a modifier
     }
 
     public function addRubrique() : void {
@@ -233,10 +228,9 @@ class CntrlMarketPlace {
                 $message = 'Le favori est créé';
                 // control
                 // if (!is_numeric($id))                       throw new \Exception(Message::ID_MUST_BE_NUMERIC);
-                // $id = (int)$id;                     // conversion en int si saisie de 10.23 !!
+                                 // conversion en int si saisie de 10.23 !!
                 // if (strlen(trim($nom_usr)) <3)                  throw new \Exception(Message::MIN_LONGUEUR_3);
                 // if (!filter_var($url, FILTER_VALIDATE_URL)) throw new \Exception(Message::URL_INVALIDE);
-                // $idRubrique = (int)$idRubrique;     // 0 si non numeric ou null
                 // if ($idRubrique==0)                         throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
         
                 // INSERT

@@ -290,7 +290,7 @@ class DaoMarketPlace {
 
 
     // TODO : contrôles 
-    public function addCategorie(TypeUser $typeUser) {
+    public function addTypeUser(TypeUser $typeUser) {
         $query      = RequetesUser::INSERT_CATEGORIE;
         try {
             $statement  = $this->conn->prepare($query);

@@ -16,33 +16,34 @@ $users = $market->getUsers();
 affiche($users);
 echo '<hr>';
 
-$TypeUser = $market->getTypeUserById(2);
+$TypeUser = $market->getTypeUser();
 affiche($TypeUser);
 echo '<hr>';
 
 //ajouter un nouveau type user
 $typeuser = new TypeUser(10,'AAdmini');
-$Types = $market->getTypeUser($typeuser);
+$market->addTypeUser($typeuser);
+$Types = $market->getTypeUser();
 affiche($Types);
 echo '<hr>';
 
-// Ajouter un utilisateur et Afficher toute la liste des utilisateurs
-echo 'adduser($user) <br>';
-$ref = 255;
-$categorie = $market->getCategorieById(2);
-$user = new User($ref,"Mister RGB", "Red","Green","Blue",0111111111,"Marc","Marc","Marc",06000,"path", $categorie);
-$ok = $market->addUser($user);
-if ($ok) {
-    $users = $market->getUsersWithCategorie();
-    affiche($users);
-}
-echo "<hr>";
+// // Ajouter un utilisateur et Afficher toute la liste des utilisateurs
+// echo 'adduser($user) <br>';
+// $ref = 255;
+// $categorie = $market->getCategorieById(2);
+// $user = new User($ref,"Mister RGB", "Red","Green","Blue",0111111111,"Marc","Marc","Marc",06000,"path", $categorie);
+// $ok = $market->addUser($user);
+// if ($ok) {
+//     $users = $market->getUsersWithCategorie();
+//     affiche($users);
+// }
+// echo "<hr>";
 
-$del = $market->delUser(311);
-if ($del) {
-    $users = $market->getUsersWithCategorie();
-    affiche($users);
-}
+// $del = $market->delUser(311);
+// if ($del) {
+//     $users = $market->getUsersWithCategorie();
+//     affiche($users);
+// }
 
 function affiche($users) : void {
     foreach ($users as $user) {

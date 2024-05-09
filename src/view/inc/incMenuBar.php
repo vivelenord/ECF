@@ -38,7 +38,7 @@
           <button type="button" class="elem bouton_nav btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Admin</button>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="vCreationCompteV2.php">Creer un Utilisateur</a></li>
+              <li><a class="dropdown-item" href="/users/ajout">Creer un Utilisateur</a></li>
               <li><a class="dropdown-item" href="SupprimerUtilisateur.php">Supprimer un Utilisateur</a></li>
           </ul>
         </div>
@@ -48,7 +48,7 @@
                    
         <button class="elem bouton_nav btn-warning"><a class="" href="panier.html">Panier</a></button>
         <li class="nav-item">
-          <a class="nav-link" href="<?=APP_ROOT ?>/favoris">Créer un compte</a>
+          <a class="nav-link" href="<?=APP_ROOT ?>/users/ajout">Créer un compte</a>
         </li>
       </li>
       </ul>
