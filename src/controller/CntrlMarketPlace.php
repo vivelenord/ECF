@@ -225,7 +225,7 @@ class CntrlMarketPlace {
                 $code_post            = $_POST['code_post'];
                 $pathImgP            = $_POST['pathImgP'];
                 $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
-                // $idtype = (int)$idtype;
+                
                 
                 $type = $daoMarketPlace->getTypeUserById($idtype);
                 $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
