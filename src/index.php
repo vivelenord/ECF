@@ -14,7 +14,7 @@ define('APP_ROOT',$app_root_phpserver);         // /6-phpMVC/demofavoris/src1 po
 define('PUBLIC_ROOT',$public_root_phpserver);   // /6-phpMVC/demofavoris/src1 pour phpserver depuis TravailDM
 
 $CntrlMarketPlace = new CntrlMarketPlace();
-if (session_status() != PHP_SESSION_ACTIVE) session_start();
+// if (session_status() != PHP_SESSION_ACTIVE) session_start();
 
 
 /* url
@@ -55,6 +55,7 @@ if ($method=='get') {
         APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
         APP_ROOT .'/users/json'             => $CntrlMarketPlace->getFavorisJson(),
         APP_ROOT .'/session'                => $CntrlMarketPlace->session(),
+        APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
         // APP_ROOT .'/session/User'           => $CntrlMarketPlace->removeSessionUser(),
         APP_ROOT .'/cookie'                 => $CntrlMarketPlace->cookie(),
         default                             => $CntrlMarketPlace->getIndex(),
@@ -63,7 +64,7 @@ if ($method=='get') {
     match($route){
         // APP_ROOT .'/users/edit'             => $CntrlMarketPlace->updateUser(),
         // // APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
-        // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
+        APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
         // APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         default                             => $CntrlMarketPlace->getIndex(),
     };

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace ECF\dao;
 
-// require_once 'DaoException.php';
 use ECF\dao\DaoException;
 
 class DatabaseUser{

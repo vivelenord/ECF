@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /FS/POO/ECF/
+RewriteBase /FS/POO/ECF/src
 
 # pour le fun
 # a tester avec http://localhost/travailDM/6-phpMVC/demofavoris/src4/salut

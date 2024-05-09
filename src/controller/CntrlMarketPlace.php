@@ -35,6 +35,116 @@ class CntrlMarketPlace {
               
         require './view/users/vusersjson.php'; // a modifier
     }
+    public function adduser() : void {
+        $message = '';
+        $messageFav = '';
+        $daoMarketPlace = new DaoMarketPlace();
+        if (isset($_POST['id'])) {
+            try {
+                $id             = $_POST['id'];
+                $nom_usr            = $_POST['nom_usr'];
+                $prenom_usr            = $_POST['prenom_usr'];
+                $mail_usr            = $_POST['mail_usr'];
+                $date_compte             = date("Y/m/d");
+                $tel_usr            = $_POST['tel_usr'];
+                $passw_usr            = $_POST['passw_usr'];
+                $ad1_usr            = $_POST['ad1_usr'];
+                $ad2_usr            = $_POST['ad2_usr'];
+                $code_post            = $_POST['code_post'];
+                $pathImgP            = $_POST['pathImgP'];
+                $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
+                
+                $type = $daoMarketPlace->getTypeUserById($idtype);
+                $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
+                $this->daoMarketPlace->addUser($user);
+                $message = 'Le favori est créé';
+                // liste des types users
+                $typeUsers = $daoMarketPlace->getTypeUser();
+                include './view/users/vajoutuser.php';
+
+
+                // control
+                // if (!is_numeric($id))                       throw new \Exception(Message::ID_MUST_BE_NUMERIC);
+                                 // conversion en int si saisie de 10.23 !!
+                // if (strlen(trim($nom_usr)) <3)                  throw new \Exception(Message::MIN_LONGUEUR_3);
+                // if (!filter_var($url, FILTER_VALIDATE_URL)) throw new \Exception(Message::URL_INVALIDE);
+                // if ($idRubrique==0)                         throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
+        
+                // INSERT
+                // $rubrique = $this->daoMarketPlace-> getRubriqueById($idRubrique);
+                // if ($rubrique == null)                      throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
+                //TODO Gerer le user en session
+                // $user = new User(1,'muller','');
+                
+                
+                // $listeFav = (isset($_SESSION['listeFav']))? $_SESSION['listeFav'] : [];
+                
+                // array_push($listeFav,$favori);
+                // $_SESSION['listeFav'] = $listeFav;
+                // $messageFav = 'Le favori est ajouté';
+                
+                
+            } catch (\Exception $e) {
+                    $message = $e->getMessage();
+            } 
+        }
+    }
+    public function delUser() : void {
+        $message = '';
+
+        // si id dans $_POST, il faut delete le user
+        if (isset($_POST['id'])) {
+            try {
+                $id             = htmlspecialchars(trim($_POST['id']));
+
+                // control
+                if (!is_numeric($id))     throw new \Exception("L'identifiant doit être numérique.");
+                $id = (int)$id;     // conversion en int
+
+                // delete du fichier image
+                $favori = $this->daoMarketPlace->getFavoriById($id);
+                if ($favori->getImage() != null) {
+                    $fichier = self::PATH_IMAGE . $favori->getImage();
+                    unlink($fichier);
+                }
+                
+                // DELETE BDD
+                $this->daoMarketPlace->delFavori($id);
+                $message = 'Votre favori est supprimé';
+            } catch (\Exception $e) {
+                $message = $e->getMessage();
+            } catch (\Error $e) {
+                $message = $e->getMessage();
+            } 
+        }
+
+        $favoris = $this->daoMarketPlace->getFavoris();        
+        require './view/favoris/vfavoris.php';
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function addRubrique() : void {
 
@@ -202,60 +312,7 @@ class CntrlMarketPlace {
         else $this->getFavoris();
     }
 
-    public function adduser() : void {
-        $message = '';
-        $messageFav = '';
-        $daoMarketPlace = new DaoMarketPlace();
-        if (isset($_POST['id'])) {
-            try {
-                $id             = $_POST['id'];
-                $nom_usr            = $_POST['nom_usr'];
-                $prenom_usr            = $_POST['prenom_usr'];
-                $mail_usr            = $_POST['mail_usr'];
-                $date_compte             = date("Y/m/d");
-                $tel_usr            = $_POST['tel_usr'];
-                $passw_usr            = $_POST['passw_usr'];
-                $ad1_usr            = $_POST['ad1_usr'];
-                $ad2_usr            = $_POST['ad2_usr'];
-                $code_post            = $_POST['code_post'];
-                $pathImgP            = $_POST['pathImgP'];
-                $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
-                
-                
-                $type = $daoMarketPlace->getTypeUserById($idtype);
-                $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
-                $this->daoMarketPlace->addUser($user);
-                $message = 'Le favori est créé';
-                // control
-                // if (!is_numeric($id))                       throw new \Exception(Message::ID_MUST_BE_NUMERIC);
-                                 // conversion en int si saisie de 10.23 !!
-                // if (strlen(trim($nom_usr)) <3)                  throw new \Exception(Message::MIN_LONGUEUR_3);
-                // if (!filter_var($url, FILTER_VALIDATE_URL)) throw new \Exception(Message::URL_INVALIDE);
-                // if ($idRubrique==0)                         throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
-        
-                // INSERT
-                // $rubrique = $this->daoMarketPlace-> getRubriqueById($idRubrique);
-                // if ($rubrique == null)                      throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
-                //TODO Gerer le user en session
-                // $user = new User(1,'muller','');
-                
-                
-                // $listeFav = (isset($_SESSION['listeFav']))? $_SESSION['listeFav'] : [];
-                
-                // array_push($listeFav,$favori);
-                // $_SESSION['listeFav'] = $listeFav;
-                // $messageFav = 'Le favori est ajouté';
-                
-                
-            } catch (\Exception $e) {
-                    $message = $e->getMessage();
-            } 
-        }
-        // liste des types users
-        $typeUsers = $daoMarketPlace->getTypeUser();
-        include './view/users/vajoutuser.php';
-
-    }
+   
     public function addFavori() : void {
         $message = '';
         $messageFav = '';
