@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace ECF\tests;
 
-require 'C:\Users\franc\Downloads\Formation DWWM\projet\Depot dossier groupe metis 28Janvier 2024\temp\DepotJsGitHub\ECF\vendor\autoload.php';
+require_once 'C:\htppd\XAMMP\htdocs\FS\POO\ECF\vendor\autoload.php';
 
 use ECF\metier\User;
 use ECF\dao\DaoMarketPlace;
