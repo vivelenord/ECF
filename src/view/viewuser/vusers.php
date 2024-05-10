@@ -17,7 +17,6 @@ $menuBar = ob_get_clean();
                 <th>Prénom</th>
                 <th>Mail</th>
                 <th>TypeUser</th>
-                <th>User</th>
                 <th>Actions</th>
                 </tr>
             </thead>

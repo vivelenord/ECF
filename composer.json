@@ -2,7 +2,7 @@
     "name": "franc/ecf",
     "autoload": {
         "psr-4": {
-            "ECF\\": "C:\\htppd\\XAMMP\\htdocs\\FS\\POO\\ECF\\src"
+            "fav4\\": "C:\\htppd\\XAMMP\\htdocs\\FS\\POO\\ECF\\src"
         }
     },
     "authors": [

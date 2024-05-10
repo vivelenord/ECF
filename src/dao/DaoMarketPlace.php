@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
-namespace ECF\dao;
+namespace fav4\dao;
 
-use ECF\dao\DatabaseUser;
-use ECF\dao\RequetesUser;
-use ECF\dao\RequetesPanier;
-use ECF\metier\Article;
-use ECF\metier\Panier;
-use ECF\metier\TypeUser;
-use ECF\metier\User;
-use ECF\webapp\DmException;
-use ECF\webapp\MyExceptionCase;
+use fav4\dao\DatabaseUser;
+use fav4\dao\RequetesUser;
+use fav4\dao\RequetesPanier;
+use fav4\metier\Article;
+use fav4\metier\Panier;
+use fav4\metier\TypeUser;
+use fav4\metier\User;
+use fav4\webapp\DmException;
+use fav4\webapp\MyExceptionCase;
 
 //TODO : gestion des exceptions
 class DaoMarketPlace {

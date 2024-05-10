@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace ECF\webapp;
+namespace fav4\webapp;
 require_once 'C:\Users\franc\Downloads\Formation DWWM\projet\Depot dossier groupe metis 28Janvier 2024\temp\DepotJsGitHub\ECF\vendor\autoload.php';
 
-use ECF\dao\DaoMarketPlace;
-use ECF\webapp\DmException;
-use ECF\metier\TypeUser;
-use ECF\metier\User;
+use fav4\dao\DaoMarketPlace;
+use fav4\webapp\DmException;
+use fav4\metier\TypeUser;
+use fav4\metier\User;
 
 $message = '';
 

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace ECF\dao;
+namespace fav4\dao;
 
-use ECF\dao\DaoException;
+use fav4\dao\DaoException;
 
 class DatabaseUser{
 

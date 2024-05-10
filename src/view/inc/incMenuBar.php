@@ -18,11 +18,11 @@
             Gestion
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/rubriques/ajout">Ajout rubrique</a></li>
-            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/rubriques">Supression rubrique</a></li>
+            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users/ajout">Ajout User</a></li>
+            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users">Supression User</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/favoris/ajout">Ajout favoris</a></li>
-            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/favoris">Supression favoris</a></li>
+            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users/ajout">Ajout autre</a></li>
+            <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users">Supression autre</a></li>
           </ul>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="<?=APP_ROOT ?>/rubriques/json">Liste des utilisateurs</a></li>

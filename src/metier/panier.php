@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace ECF\metier;
+namespace fav4\metier;
   
 class Panier {
 

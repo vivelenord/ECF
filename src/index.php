@@ -1,6 +1,6 @@
 <?php
-namespace ECF;
-use ECF\controller\CntrlMarketPlace;
+namespace fav4;
+use fav4\controller\CntrlMarketPlace;
 require_once 'C:\htppd\XAMMP\htdocs\FS\POO\ECF\vendor\autoload.php';
 
 // recuperation de la config - lie au fait que je n'ouvre pas vscode a la racine du projet
@@ -53,18 +53,18 @@ if ($method=='get') {
         APP_ROOT .'/'                       => $CntrlMarketPlace->getIndex(),
         APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
-        APP_ROOT .'/users/json'             => $CntrlMarketPlace->getFavorisJson(),
-        APP_ROOT .'/session'                => $CntrlMarketPlace->session(),
-        APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
+        // APP_ROOT .'/users/json'             => $CntrlMarketPlace->getFavorisJson(),
+        // APP_ROOT .'/session'                => $CntrlMarketPlace->session(),
+        // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
         // APP_ROOT .'/session/User'           => $CntrlMarketPlace->removeSessionUser(),
-        APP_ROOT .'/cookie'                 => $CntrlMarketPlace->cookie(),
+        // APP_ROOT .'/cookie'                 => $CntrlMarketPlace->cookie(),
         default                             => $CntrlMarketPlace->getIndex(),
     };
 } elseif ($method=='post') {
     match($route){
         // APP_ROOT .'/users/edit'             => $CntrlMarketPlace->updateUser(),
         // // APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
-        APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
+        // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
         // APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         default                             => $CntrlMarketPlace->getIndex(),
     };

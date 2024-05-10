@@ -1,20 +1,21 @@
 <?php
 declare(strict_types=1);
-namespace ECF\tests;
+namespace fav4\tests;
 
 require_once 'C:\htppd\XAMMP\htdocs\FS\POO\ECF\vendor\autoload.php';
 
-use ECF\metier\User;
-use ECF\dao\DaoMarketPlace;
-use ECF\metier\TypeUser;
+use fav4\metier\User;
+use fav4\dao\DaoMarketPlace;
+use fav4\metier\TypeUser;
 
 
 // on instancie la couche de persistance
 $market = new DaoMarketPlace();
 //Affichage des utilisateurs
 $users = $market->getUsers();
-affiche($users);
-echo '<hr>';
+require '../view/viewuser/vusers.php';
+// affiche($users);
+// echo '<hr>';
 
 $TypeUser = $market->getTypeUser();
 affiche($TypeUser);

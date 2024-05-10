@@ -1,5 +1,5 @@
 <?php
-namespace ECF\dao;
+namespace fav4\dao;
 
 class RequetesUser {
     public const SELECT_User                = "select id, nom_usr, prenom_usr, mail_usr,date_compte, tel_usr,passw_usr, ad1_usr, ad2_usr, code_post, pathImgP, type from User";

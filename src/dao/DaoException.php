@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace ECF\dao;
+namespace fav4\dao;
 
 class DaoException extends \Exception {
     
