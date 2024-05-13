@@ -9,7 +9,7 @@
 <?php ob_start(); ?>
 <h1 class="my-3">Creation du compte</h1>
         <p id="message2" style="color: white;text-align: center;font-size: 25px"></p>
-        <form class="row g-3" id="form-user" method="post" action="http://localhost:3000/src/webapp/CreerUtilisateur.php">
+        <form class="row g-3" id="form-user" method="post" action="<?=APP_ROOT ?>/users/ajout">
             <?php foreach($typeUsers as $typeUser) { ?>
                 <div class="form-check">
                 <input class="form-check-input" type="radio" name="choix" id="<?= $typeUser->getLibelle() ?>" value="<?= $typeUser->getId() ?>" checked>
@@ -89,5 +89,6 @@
             </div>
         </form>
         <!-- Fin du formulaire -->
+<script defer type="module" src="<?= PUBLIC_ROOT . "/assets/js/pageCreationCompteV2.js" ?>"></script>
 <?php $content = ob_get_clean(); ?>
 <?php require('./view/base.php'); ?>

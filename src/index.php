@@ -63,7 +63,7 @@ if ($method=='get') {
 } elseif ($method=='post') {
     match($route){
         // APP_ROOT .'/users/edit'             => $CntrlMarketPlace->updateUser(),
-        // // APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
+        APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
         // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
         // APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         default                             => $CntrlMarketPlace->getIndex(),

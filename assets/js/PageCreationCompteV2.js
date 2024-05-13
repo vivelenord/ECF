@@ -1,13 +1,13 @@
-import * as data from './dataCreationCompte.js';
-
+import * as data from '/assets/js/dataCreationCompte.js';
+console.log(data.users);
 let soumettre = document.querySelector("#soumettre");
 soumettre.addEventListener("click",ajouterNewUser);
 
 //Affichage des utiliasaterus qui ont crée un compte 
-var enteteMenu = document.querySelector('#menu-flters');
-data.users.forEach(typeuser => {
-    enteteMenu.innerHTML += typeuser.getComposantHtml();
-});
+// var enteteMenu = document.querySelector('#menu-flters');
+// data.users.forEach(typeuser => {
+//     enteteMenu.innerHTML += typeuser.getComposantHtml();
+// });
 
 let zoneListe = document.querySelector("#zoneSelect1");
 fetch('https://geo.api.gouv.fr/departements')

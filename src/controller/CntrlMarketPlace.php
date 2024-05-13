@@ -78,9 +78,13 @@ class CntrlMarketPlace {
             } catch (\Exception $e) {
                     $message = $e->getMessage();
             } 
+            
+            $this->getUsers();
         }
-        $typeUsers = $daoMarketPlace->getTypeUser();
-        include './view/users/vajoutuser.php';
+        else{
+            $typeUsers = $daoMarketPlace->getTypeUser();
+            include './view/viewuser/vajoutuser.php';
+        } 
     }
     // public function delUser() : void {
     //     $message = '';
