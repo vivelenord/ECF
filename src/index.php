@@ -20,17 +20,11 @@ $CntrlMarketPlace = new CntrlMarketPlace();
 /* url
                                 GET   page accueil
     /                    	    GET   page accueil
-    /rubriques                  GET   affichage de la liste des rubriques
-    /rubriques/ajout            GET   affichage formulaire ajout rubrique
-    /rubriques/ajout            POST  ajout d'une rubrique
-    /rubriques/one              GET   voir une rubrique
-    /rubriques/suppression      POST  suppression d'une rubrique
-    /favoris                    GET   affichage de la liste des favoris
-    /favoris/ajout              GET   affichage formulaire ajout favori
-    /favoris/ajout              POST  ajout du favori
-    /favoris/one                GET   voir un favori
-    /favoris/suppression        POST  suppression d'un favori
-    /users                      GET   affichage de la liste des users
+    /users                      GET   affichage de la liste des utilisateurs
+    /users/ajout                GET   affichage formulaire ajout d'un utilisateur
+    /rubriques/one              GET   voir un utilisateur
+    /users/ajout                POST  ajout d'un utilisateur'
+    /user/suppression           POST  suppression d'un utilisateur
 
 */
 
@@ -53,6 +47,7 @@ if ($method=='get') {
         APP_ROOT .'/'                       => $CntrlMarketPlace->getIndex(),
         APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
+        APP_ROOT .'/artisans/ajout'            => $CntrlMarketPlace->getArtisans(),
         // APP_ROOT .'/users/json'             => $CntrlMarketPlace->getFavorisJson(),
         // APP_ROOT .'/session'                => $CntrlMarketPlace->session(),
         // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),

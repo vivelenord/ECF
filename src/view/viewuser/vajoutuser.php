@@ -81,7 +81,7 @@
                 <label class="ajoutphoto">Ajouter une photo de profil</label>
                 <input type="file" name="pathImage" class="form-control-file" id="photoprofil">
             </div>
-
+            <div class="mt-3 error-message"><p><?= (isset($message))? $message : '' ?></p></div>
             <div class="col-10">
                 <button class="btn btn-2 col-10 ms-5 mt-2 ps-3" id="soumettre" type="submit">Valider</button></div>
                 <div class="mt-5"><?=$message ?></div>

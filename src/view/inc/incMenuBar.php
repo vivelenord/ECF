@@ -10,9 +10,9 @@
         <li class="nav-item">
           <a class="nav-link" href="<?=APP_ROOT ?>/users">Liste des utilisateurs</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="<?=APP_ROOT ?>/favoris">Liste des clients</a>
-        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?=APP_ROOT ?>/favoris">Liste des artisans</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Gestion
@@ -38,7 +38,7 @@
           <button type="button" class="elem bouton_nav btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Admin</button>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/users/ajout">Creer un Utilisateur</a></li>
+              <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users/ajout">Creer un Utilisateur</a></li>
               <li><a class="dropdown-item" href="SupprimerUtilisateur.php">Supprimer un Utilisateur</a></li>
           </ul>
         </div>

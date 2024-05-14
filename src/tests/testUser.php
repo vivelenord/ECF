@@ -28,17 +28,17 @@ $Types = $market->getTypeUser();
 affiche($Types);
 echo '<hr>';
 
-// // Ajouter un utilisateur et Afficher toute la liste des utilisateurs
-// echo 'adduser($user) <br>';
-// $ref = 255;
-// $categorie = $market->getCategorieById(2);
-// $user = new User($ref,"Mister RGB", "Red","Green","Blue",0111111111,"Marc","Marc","Marc",06000,"path", $categorie);
-// $ok = $market->addUser($user);
-// if ($ok) {
-//     $users = $market->getUsersWithCategorie();
-//     affiche($users);
-// }
-// echo "<hr>";
+// Ajouter un utilisateur et Afficher toute la liste des utilisateurs
+echo 'adduser($user) <br>';
+$ref = 112233;
+$categorie = $market->getCategorieById(2);
+$user = new User($ref,"Mister RGB", "Red","Green","Blue",0111111111,"Marc","Marc","Marc",06000,"path", $categorie);
+$ok = $market->addUser($user);
+if ($ok) {
+    $users = $market->getUsersWithCategorie();
+    affiche($users);
+}
+echo "<hr>";
 
 // $del = $market->delUser(311);
 // if ($del) {
@@ -46,12 +46,7 @@ echo '<hr>';
 //     affiche($users);
 // }
 
-function affiche($users) : void {
-    foreach ($users as $user) {
-        echo $user;
-        echo '<br>';
-    }
-}
+
 
 
 
@@ -77,7 +72,7 @@ function affiche($users) : void {
 // $typeuser = new TypeUser(2,'Artisan');
 // $type = $market->getTypeUser($typeuser);
 // // // $type = 1;
-// $ref=30;
+// $ref=112233;
 // // $typeuser = 2;
 // $user = new User($ref,"Marc", "Marc","Marc","Marc",0111111111,"Marc","Marc","Marc",06000,"path", $typeuser);
 // $ok = $market->addUser($user);
@@ -93,3 +88,9 @@ function affiche($users) : void {
 // affiche($plats);
 // echo '<hr>';
 
+function affiche($users) : void {
+    foreach ($users as $user) {
+        echo $user;
+        echo '<br>';
+    }
+}

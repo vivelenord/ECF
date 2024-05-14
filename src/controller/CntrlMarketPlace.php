@@ -11,7 +11,7 @@ class CntrlMarketPlace {
     private \PDO $conn;
 
     //TODO parametrer le chemin des images
-    private const PATH_IMAGE = '../assets/img/favoris/';
+    private const PATH_IMAGE = '../assets/images/users/';
 
     public function __construct(
         private DaoMarketPlace $daoMarketPlace = new DaoMarketPlace()
@@ -22,12 +22,16 @@ class CntrlMarketPlace {
         require './view/vindex.php';
     }
 
-// ==============  LES Users
+// ==============  LES Utilisateurs
 
     public function getUsers() : void {
         $users = $this->daoMarketPlace->getUsers(); 
         require './view/viewuser/vusers.php';
     }
+    // public function getArtisans() : void {
+    //     $users = $this->daoMarketPlace->getUsersByTypeUser();
+    //     require './view/viewuser/vusers.php';
+    // }
     public function getUserJson() : void {
         $content = array();
         $users = $this->daoMarketPlace->getUsers();
@@ -41,51 +45,71 @@ class CntrlMarketPlace {
         $daoMarketPlace = new DaoMarketPlace();
         if (isset($_POST['id'])) {
             try {
-                $id             = $_POST['id'];
+                $id             = (int)$_POST['id'];
                 $nom_usr            = $_POST['nom_usr'];
                 $prenom_usr            = $_POST['prenom_usr'];
                 $mail_usr            = $_POST['mail_usr'];
                 $date_compte             = date("Y/m/d");
-                $tel_usr            = $_POST['tel_usr'];
+                $tel_usr            = (int)$_POST['tel_usr'];
                 $passw_usr            = $_POST['passw_usr'];
                 $ad1_usr            = $_POST['ad1_usr'];
                 $ad2_usr            = $_POST['ad2_usr'];
-                $code_post            = $_POST['code_post'];
-                $pathImgP            = $_POST['pathImgP'];
+                $code_post            = (int)$_POST['code_post'];
+                // $pathImgP            = $_POST['pathImgP'];
+                $pathImgP            = "ffff";
+                // $pathImgP          = $this->uploadImage()[0];
                 $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
                 $type = $daoMarketPlace->getTypeUserById($idtype);
                 $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
                 $this->daoMarketPlace->addUser($user);
-                $message = 'Le favori est créé';
-                // liste des types users
-                // control
-                // if (!is_numeric($id))                       throw new \Exception(Message::ID_MUST_BE_NUMERIC);
-                // conversion en int si saisie de 10.23 !!
-                // if (strlen(trim($nom_usr)) <3)                  throw new \Exception(Message::MIN_LONGUEUR_3);
-                // if (!filter_var($url, FILTER_VALIDATE_URL)) throw new \Exception(Message::URL_INVALIDE);
-                // if ($idRubrique==0)                         throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
-        
-                // INSERT
-                // $rubrique = $this->daoMarketPlace-> getRubriqueById($idRubrique);
-                // if ($rubrique == null)                      throw new \Exception(Message::RUBRIQUE_MUST_EXIST);
-                //TODO Gerer le user en session
-                // $user = new User(1,'muller','');
-                // $listeFav = (isset($_SESSION['listeFav']))? $_SESSION['listeFav'] : [];
-                // array_push($listeFav,$favori);
-                // $_SESSION['listeFav'] = $listeFav;
-                // $messageFav = 'Le favori est ajouté';
-                
+                $message = 'L utilisateur est créé';                
             } catch (\Exception $e) {
                     $message = $e->getMessage();
             } 
-            
-            $this->getUsers();
-        }
+            $this->getUsers();        }
         else{
             $typeUsers = $daoMarketPlace->getTypeUser();
             include './view/viewuser/vajoutuser.php';
         } 
     }
+    /**
+     * upload image 
+     * recupere l'image dans $_FILE et l'upload dans le site. 
+     *
+     * @return array [string uid image | null, message erreur | '']
+     */
+    //TODO parametrer le chemin d'upload des images
+    function uploadImage() : array {
+        // var_dump($_FILES);
+        $message = '';
+        $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+        $maxSize = 500000;
+        $file = null;   // nom image = null, message = ''
+    
+        if(isset($_FILES['image'])){
+            $tmpName    = $_FILES['image']['tmp_name'];      // nom donne par le systeme
+            $name       = $_FILES['image']['name'];          // pour recuperer l extension du fichier
+            $size       = $_FILES['image']['size'];
+            $error      = $_FILES['image']['error'];          
+            // recuperation de l'extension
+            $tabName = explode('.', $name);
+            $extension = strtolower(end($tabName));        
+            // traitement de l'image
+            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                    $uniqueName = uniqid('', true);                   //uniqid exemple : 64437981e2cff3.06777509
+                    $file = 'img-'.$uniqueName.".".$extension;
+                    // de D:\xampp\tmp\php757D.tmp vers self::PATH_IMAGE.$file
+                    move_uploaded_file($tmpName, self::PATH_IMAGE . $file);       // enregistrement de l'image dans le site
+            }
+            else{
+                $message = Message::IMAGE_INVALIDE;
+            }
+        }
+        return [$file,$message]; 
+    }
+
+
+
     // public function delUser() : void {
     //     $message = '';
 
