@@ -51,6 +51,27 @@ class DaoMarketPlace {
         return $users;
         // echo $users;
     }
+    public function getArtisans() : ? array {
+        $users = array();
+        $query      = RequetesUser::SELECT_Artisan;
+        try {
+            $cursor  = $this->conn->query($query);
+            // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select
+            while ($row = $cursor->fetch(\PDO::FETCH_OBJ)) {
+                $typeUser = $this->getTypeUserById(1);
+                $user = new User($row->id, $row->nom_usr, $row->prenom_usr, $row->mail_usr,$row->date_compte, $row->tel_usr,$row->passw_usr,$row->ad1_usr,$row->ad2_usr,$row->code_post, $row->pathImgP, $typeUser);
+                array_push($users,$user);
+            }
+        }
+        catch (\Exception $e) {
+            throw new \Exception('Exception RESTAU !!! : ' .  $e->getMessage() , $this->convertCode($e->getCode()));
+        }
+        catch (\Error $error) {
+            throw new \Exception('Error RESTAU !!! : ' .  $error->getMessage());
+        }
+        return $users;
+        // echo $users;
+    }
 
         /**
      * Retourne la liste des type users de la BDD
@@ -100,7 +121,7 @@ class DaoMarketPlace {
     }
     public function getUsersByTypeUser(int $id) {
         $users = array();
-        $query      = RequetesUser::SELECT_Users_BY_CATEGORIE;
+        $query      = RequetesUser::SELECT_User_BY_ID;
         try {
             $cursor  = $this->conn->query($query);
             // FETCH_OBJ pour obtenir la ligne sous forme d'un objet construit avec les cles correspondantes aux colonnes du select

@@ -9,7 +9,7 @@
 <?php ob_start(); ?>
 <h1 class="my-3">Creation du compte</h1>
         <p id="message2" style="color: white;text-align: center;font-size: 25px"></p>
-        <form class="row g-3" id="form-user" method="post" action="<?=APP_ROOT ?>/users/ajout">
+        <form class="row g-3" id="form-user" method="post" enctype="multipart/form-data" action="<?=APP_ROOT ?>/users/ajout">
             <?php foreach($typeUsers as $typeUser) { ?>
                 <div class="form-check">
                 <input class="form-check-input" type="radio" name="choix" id="<?= $typeUser->getLibelle() ?>" value="<?= $typeUser->getId() ?>" checked>
@@ -79,7 +79,7 @@
             
             <div class="col-12">
                 <label class="ajoutphoto">Ajouter une photo de profil</label>
-                <input type="file" name="pathImage" class="form-control-file" id="photoprofil">
+                <input type="file" name="image" class="form-control-file" id="photoprofil">
             </div>
             <div class="mt-3 error-message"><p><?= (isset($message))? $message : '' ?></p></div>
             <div class="col-10">

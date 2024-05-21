@@ -27,7 +27,7 @@ $menuBar = ob_get_clean();
                     <td><?= $user->getNom_usr() ?></td>
                     <td><?= $user->getPrenom_usr() ?></td>
                     <td><?= $user->getMail_usr() ?></td>
-                    <td><?= ($user->getCategorie() != null)? $user->getCategorie()->getId() . ' - ' . $user->getCategorie()->getId() : '' ?></td>
+                    <td><?= ($user->getCategorie() != null)? $user->getCategorie()->getId() : '' ?></td>
                     <td>
                         <div class="d-flex justify-content-end gap-2">
                             <a class='btn btn-primary btn-sm' href="<?=APP_ROOT ?>/users/one?id=<?= $user->getId() ?>">Voir</a>

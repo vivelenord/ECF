@@ -11,7 +11,7 @@
           <a class="nav-link" href="<?=APP_ROOT ?>/users">Liste des utilisateurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=APP_ROOT ?>/favoris">Liste des artisans</a>
+          <a class="nav-link" href="<?=APP_ROOT ?>/users/artisans">Liste des artisans</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,11 +39,11 @@
           Admin</button>
           <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users/ajout">Creer un Utilisateur</a></li>
-              <li><a class="dropdown-item" href="SupprimerUtilisateur.php">Supprimer un Utilisateur</a></li>
+              <li><a class="dropdown-item" href="<?=APP_ROOT ?>/users">Supprimer un Utilisateur</a></li>
           </ul>
         </div>
-        <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.php">Login Artisan</a></button>
-        <button class="elem bouton_nav btn-warning"><a class="" href="PageConnexion.php">Login Client</a></button>
+        <button class="elem bouton_nav btn-warning"><a class="" href="<?=APP_ROOT ?>/users/login">Login Artisan</a></button>
+        <button class="elem bouton_nav btn-warning"><a class="" href="<?=APP_ROOT ?>/users/login">Login Client</a></button>
         
                    
         <button class="elem bouton_nav btn-warning"><a class="" href="panier.html">Panier</a></button>

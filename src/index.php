@@ -47,7 +47,10 @@ if ($method=='get') {
         APP_ROOT .'/'                       => $CntrlMarketPlace->getIndex(),
         APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
-        APP_ROOT .'/artisans/ajout'            => $CntrlMarketPlace->getArtisans(),
+        APP_ROOT .'/users/one'              => $CntrlMarketPlace->getUser(),
+        APP_ROOT .'/users/login'            => $CntrlMarketPlace->login(),
+        APP_ROOT .'/users/artisans'         => $CntrlMarketPlace->getArtisans(),
+        // APP_ROOT .'/artisans/ajout'       => $CntrlMarketPlace->getArtisans(),
         // APP_ROOT .'/users/json'             => $CntrlMarketPlace->getFavorisJson(),
         // APP_ROOT .'/session'                => $CntrlMarketPlace->session(),
         // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
@@ -59,7 +62,8 @@ if ($method=='get') {
     match($route){
         // APP_ROOT .'/users/edit'             => $CntrlMarketPlace->updateUser(),
         APP_ROOT .'/users/ajout'            => $CntrlMarketPlace->addUser(),
-        // APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
+        APP_ROOT .'/users/suppression'      => $CntrlMarketPlace->delUser(),
+        APP_ROOT .'/users/login'            => $CntrlMarketPlace->login(),
         // APP_ROOT .'/users'                  => $CntrlMarketPlace->getUsers(),
         default                             => $CntrlMarketPlace->getIndex(),
     };

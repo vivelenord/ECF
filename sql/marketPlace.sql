@@ -3,30 +3,30 @@ drop table if exists TypeUser;
 drop table if exists User;
 
 create table if not exists TypeUser(
-    type		int 	primary key,  
+    type		    int 	    primary key,  
     lib_type 		CHAR(10) 	not null
 ) engine=InnoDB;
 
 create table if not exists User(
-    id 		int 	primary key auto_increment,  
+    id 		        int 	        primary key auto_increment,  
     nom_usr 		VARCHAR(50) 	not null,
     prenom_usr 		VARCHAR(50) 	not null,
     mail_usr 		VARCHAR(50) 	not null,
-    date_compte 	date 	not null,
-    tel_usr 		INT 	not null,
+    date_compte 	date 	        not null,
+    tel_usr 		INT 	        not null,
     passw_usr 		VARCHAR(50) 	not null,
     ad1_usr 		VARCHAR(50) 	not null,
     ad2_usr 		VARCHAR(50) 	,
-    code_post		INT 	not null check (code_post REGEXP '^[0-9]{4,5}$'),
+    code_post		INT 	        not null check (code_post REGEXP '^[0-9]{4,5}$'),
     pathImgP		VARCHAR(50),
-    type		int not null,
+    type		    int             not null,
     foreign key (type) references TypeUser(type)
     
 ) engine=InnoDB;
 
 create table categorie (
-    id_categorie INT PRIMARY KEY,
-    libelle_categorie VARCHAR(100) NOT NULL 
+    id_categorie        INT PRIMARY KEY,
+    libelle_categorie   VARCHAR(100) NOT NULL 
 
 ) engine=InnoDB;
    

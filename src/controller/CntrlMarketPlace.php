@@ -54,19 +54,20 @@ class CntrlMarketPlace {
                 $passw_usr            = $_POST['passw_usr'];
                 $ad1_usr            = $_POST['ad1_usr'];
                 $ad2_usr            = $_POST['ad2_usr'];
-                $code_post            = (int)$_POST['code_post'];
-                // $pathImgP            = $_POST['pathImgP'];
-                $pathImgP            = "ffff";
-                // $pathImgP          = $this->uploadImage()[0];
+                $code_post            = 6000;
+                // $code_post            = (int)$_POST['code_post'];
+
+                $pathImgP          = $this->uploadImage()[0];
                 $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
                 $type = $daoMarketPlace->getTypeUserById($idtype);
                 $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
                 $this->daoMarketPlace->addUser($user);
-                $message = 'L utilisateur est créé';                
+                $message = 'Utilisateur est créé';                
             } catch (\Exception $e) {
                     $message = $e->getMessage();
             } 
-            $this->getUsers();        }
+            $users = $this->daoMarketPlace->getUsers(); 
+            require './view/viewuser/vusers.php';        }
         else{
             $typeUsers = $daoMarketPlace->getTypeUser();
             include './view/viewuser/vajoutuser.php';
@@ -90,12 +91,13 @@ class CntrlMarketPlace {
             $tmpName    = $_FILES['image']['tmp_name'];      // nom donne par le systeme
             $name       = $_FILES['image']['name'];          // pour recuperer l extension du fichier
             $size       = $_FILES['image']['size'];
-            $error      = $_FILES['image']['error'];          
+            $error      = $_FILES['image']['error'];     
+            // var_dump($_FILES['image']);     
             // recuperation de l'extension
             $tabName = explode('.', $name);
             $extension = strtolower(end($tabName));        
             // traitement de l'image
-            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+            if(in_array($extension, $extensions) && $error == 0){
                     $uniqueName = uniqid('', true);                   //uniqid exemple : 64437981e2cff3.06777509
                     $file = 'img-'.$uniqueName.".".$extension;
                     // de D:\xampp\tmp\php757D.tmp vers self::PATH_IMAGE.$file
@@ -107,44 +109,90 @@ class CntrlMarketPlace {
         }
         return [$file,$message]; 
     }
+    public function getUser() : void {
+        $user = null;
+        if (isset($_GET['id'])) { 
+            $id = (int)$_GET['id'];
+            $user = $this->daoMarketPlace->getUSerById($id);
+        }
+        if (isset($user)) {
+            require './view/viewuser/vuser.php';
+        }
+        else $this->getUser();
+    }
 
 
+    public function delUser() : void {
+        $message = '';
 
-    // public function delUser() : void {
-    //     $message = '';
+        // si id dans $_POST, il faut delete le user
+        if (isset($_POST['id'])) {
+            try {
+                $id             = htmlspecialchars(trim($_POST['id']));
 
-    //     // si id dans $_POST, il faut delete le user
-    //     if (isset($_POST['id'])) {
-    //         try {
-    //             $id             = htmlspecialchars(trim($_POST['id']));
+                // control
+                if (!is_numeric($id))     throw new \Exception("L'identifiant doit être numérique.");
+                $id = (int)$id;     // conversion en int
 
-    //             // control
-    //             if (!is_numeric($id))     throw new \Exception("L'identifiant doit être numérique.");
-    //             $id = (int)$id;     // conversion en int
-
-    //             // delete du fichier image
-    //             $favori = $this->daoMarketPlace->getFavoriById($id);
-    //             if ($favori->getImage() != null) {
-    //                 $fichier = self::PATH_IMAGE . $favori->getImage();
-    //                 unlink($fichier);
-    //             }
+                // delete du fichier image
+                $user = $this->daoMarketPlace->getuserById($id);
+                if ($user->getPathImage() != null) {
+                    $fichier = self::PATH_IMAGE . $user->getPathImage();
+                    unlink($fichier);
+                }
                 
-    //             // DELETE BDD
-    //             $this->daoMarketPlace->delFavori($id);
-    //             $message = 'Votre favori est supprimé';
-    //         } catch (\Exception $e) {
-    //             $message = $e->getMessage();
-    //         } catch (\Error $e) {
-    //             $message = $e->getMessage();
-    //         } 
-    //     }
+                // DELETE BDD
+                $this->daoMarketPlace->delUser($id);
+                $message = 'Cet utilisateur est supprimé';
+            } catch (\Exception $e) {
+                $message = $e->getMessage();
+            } catch (\Error $e) {
+                $message = $e->getMessage();
+            } 
+        }
 
-    //     $favoris = $this->daoMarketPlace->getFavoris();        
-    //     require './view/favoris/vfavoris.php';
-    // }
+        $users = $this->daoMarketPlace->getUsers();       
+        require './view/viewuser/vusers.php';
+    }
 
+    public function login() : void {
+        $message = '';
+        $messageFav = '';
+        $daoMarketPlace = new DaoMarketPlace();
+        if (isset($_POST['id'])) {
+            try {
+                $id             = (int)$_POST['id'];
+                $nom_usr            = $_POST['nom_usr'];
+                $prenom_usr            = $_POST['prenom_usr'];
+                $mail_usr            = $_POST['mail_usr'];
+                $date_compte             = date("Y/m/d");
+                $tel_usr            = (int)$_POST['tel_usr'];
+                $passw_usr            = $_POST['passw_usr'];
+                $ad1_usr            = $_POST['ad1_usr'];
+                $ad2_usr            = $_POST['ad2_usr'];
+                $code_post            = 6000;
+                // $code_post            = (int)$_POST['code_post'];
 
-
+                $pathImgP          = $this->uploadImage()[0];
+                $idtype       = (int)htmlspecialchars(trim($_POST['choix']));
+                $type = $daoMarketPlace->getTypeUserById($idtype);
+                $user = new User($id, $nom_usr, $prenom_usr, $mail_usr, $date_compte,$tel_usr, $passw_usr,$ad1_usr,$ad2_usr, $code_post,$pathImgP,$type);
+                $this->daoMarketPlace->addUser($user);
+                $message = 'Utilisateur est créé';                
+            } catch (\Exception $e) {
+                    $message = $e->getMessage();
+            } 
+            $users = $this->daoMarketPlace->getUsers(); 
+            require './view/viewuser/vuser.php';        }
+        else{
+            $typeUsers = $daoMarketPlace->getTypeUser();
+            include './view/viewuser/vPageConnexion.php';
+        } 
+    }
+    public function getArtisans() : void {
+        $users = $this->daoMarketPlace->getArtisans();
+        require './view/viewuser/vusers.php';
+    }
 
 
 
